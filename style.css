@@ -29,8 +29,9 @@ body::before {
   inset: 0;
   background-image: url('noise.svg');
   background-repeat: repeat;
-  background-size: 120px 120px;
-  opacity: 0.12; /* subtle but visible */
+  background-size: 80px 80px; /* finer grain */
+  opacity: 0.18; /* stronger but still subtle */
+  mix-blend-mode: screen; /* make white noise show on black */
   pointer-events: none;
   z-index: 0;
 }

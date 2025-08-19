@@ -6,13 +6,7 @@
 }
 
 body {
-  background:
-    linear-gradient(180deg, #000 0%, #050505 50%, #000 100%), /* base */
-    url('bg-symbols.svg'); /* symbols */
-  background-repeat: no-repeat, repeat;
-  background-size: auto, 360px 360px;
-  background-position: center top, 0 0;
-  background-blend-mode: normal, normal;
+  background: linear-gradient(180deg, #000 0%, #0a0a0a 50%, #111 100%);
   color: #fff;
   font-family: 'Noto Sans TC', system-ui, -apple-system, Segoe UI, Roboto, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', Arial, sans-serif;
   line-height: 1.6;
@@ -21,69 +15,20 @@ body {
   letter-spacing: 0.01em; /* slightly tighter for CJK */
 }
 
-/* Wrap all content (except the fixed static overlay) so body itself has no transform.
-   This keeps the fixed overlay truly viewport-fixed across the entire page. */
-.page-wrap {
-  position: relative;
-  z-index: 1; /* above noise and scanlines (z=0) */
-  transform-origin: 50% 50%;
-  animation: pageGlitch 8s infinite; /* brief, noticeable disruption */
-  will-change: transform, filter;
-}
-
-/* Animated noise overlay (live TV static) */
+/* Strong live static overlay */
 .noise-overlay {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 0; /* below content wrapper */
-  opacity: 0.32; /* slightly toned down */
-  mix-blend-mode: normal; /* overlay directly for visibility */
-  will-change: opacity;
-  animation: noiseBoost 8s infinite linear; /* spike during glitch */
+  z-index: 0; /* keep it behind all content */
+  mix-blend-mode: normal;
+  opacity: 0.42; /* loud by default */
 }
 
-/* Scanline overlay that flashes only during the glitch window */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0; /* keep under content like the noise */
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.0) 0px,
-      rgba(255,255,255,0.0) 7px,
-      rgba(255,255,255,0.14) 8px,
-      rgba(255,255,255,0.14) 9px
-    );
-  mix-blend-mode: screen;
-  opacity: 0;
-  animation: barsFlash 8s infinite linear;
-}
-
-@keyframes pageGlitch {
-  0%, 95%, 100% { transform: none; filter: none; }
-  96% { transform: translate3d(-2px, 0, 0) skewX(-0.6deg); filter: contrast(1.2) saturate(1.1); }
-  97% { transform: translate3d(3px, 0, 0) skewX(0.8deg); filter: contrast(1.5) saturate(1.25) hue-rotate(4deg); }
-  98% { transform: translate3d(-1px, 0, 0) skewX(-0.4deg); filter: contrast(1.25); }
-  99% { transform: none; filter: none; }
-}
-
-@keyframes noiseBoost {
-  0%, 95%, 100% { opacity: 0.32; }
-  96%, 98% { opacity: 0.55; }
-  99% { opacity: 0.32; }
-}
-
-@keyframes barsFlash {
-  0%, 95%, 100% { opacity: 0; }
-  96%, 98% { opacity: 0.18; }
-  99% { opacity: 0; }
-}
+/* ensure main content layers above overlay */
+header, .ticker, .container, footer { position: relative; z-index: 1; }
 
 /* Make headings extra bold and larger */
 h1, h2, h3, h4, h5, h6 {
@@ -101,7 +46,6 @@ header {
   border-bottom: 1px solid #fff;
   position: relative; /* positioning context for side images */
   overflow: hidden; /* clip side images to header box */
-  z-index: 1; /* above noise overlay */
 }
 
 .topnav {
@@ -144,8 +88,6 @@ header {
 .ticker {
   overflow: hidden;
   border-bottom: 1px solid #fff;
-  position: relative;
-  z-index: 1;
 }
 
 .ticker__inner {
@@ -198,8 +140,6 @@ header {
 .container {
   width: min(1120px, 92%);
   margin: 0 auto;
-  position: relative;
-  z-index: 1; /* lift content above overlay */
 }
 
 .header-inner {

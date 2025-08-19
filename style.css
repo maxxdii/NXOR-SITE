@@ -81,7 +81,7 @@ header {
 .side-gif {
   position: absolute; /* anchor to header */
   top: 50%;
-  transform: translateY(calc(-50% + 12px)); /* slight downward nudge */
+  transform: translateY(calc(-50% + 20px)); /* slightly more downward nudge */
   width: clamp(340px, 38vw, 700px); /* restore larger, bolder presence */
   height: auto;
   aspect-ratio: 1 / 1;

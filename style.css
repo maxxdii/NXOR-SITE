@@ -18,27 +18,68 @@ body {
   isolation: isolate; /* ensure negative z elements sit under all body children */
 }
 
-/* Strong live static overlay */
-.noise-overlay {
+/* Static overlay via CSS animation in pseudo-element */
+body::before {
+  content: "";
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
+  background-image: 
+    radial-gradient(circle at 20% 80%, transparent 20%, rgba(255,255,255,0.03) 21%, rgba(255,255,255,0.03) 29%, transparent 30%),
+    radial-gradient(circle at 80% 20%, transparent 20%, rgba(255,255,255,0.03) 21%, rgba(255,255,255,0.03) 29%, transparent 30%),
+    radial-gradient(circle at 40% 40%, transparent 20%, rgba(255,255,255,0.05) 21%, rgba(255,255,255,0.05) 29%, transparent 30%);
+  background-size: 50px 50px, 80px 80px, 60px 60px;
+  opacity: 0.4;
+  animation: staticNoise 0.1s linear infinite;
   pointer-events: none;
-  z-index: -9999; /* force far under all body children */
-  mix-blend-mode: normal;
-  opacity: 0.42; /* loud by default */
+  z-index: -1;
+}
+
+@keyframes staticNoise {
+  0%, 100% { 
+    transform: translate(0px, 0px); 
+    background-position: 0 0, 20px 20px, 40px 40px;
+  }
+  10% { 
+    transform: translate(-2px, 2px); 
+    background-position: 2px 2px, 22px 18px, 38px 42px;
+  }
+  20% { 
+    transform: translate(2px, -2px); 
+    background-position: -2px -2px, 18px 22px, 42px 38px;
+  }
+  30% { 
+    transform: translate(-1px, -1px); 
+    background-position: 1px 1px, 21px 19px, 39px 41px;
+  }
+  40% { 
+    transform: translate(1px, 1px); 
+    background-position: -1px -1px, 19px 21px, 41px 39px;
+  }
+  50% { 
+    transform: translate(-2px, 0px); 
+    background-position: 2px 0px, 22px 20px, 38px 40px;
+  }
+  60% { 
+    transform: translate(2px, 2px); 
+    background-position: -2px -2px, 18px 18px, 42px 42px;
+  }
+  70% { 
+    transform: translate(0px, -2px); 
+    background-position: 0px 2px, 20px 22px, 40px 38px;
+  }
+  80% { 
+    transform: translate(-1px, 2px); 
+    background-position: 1px -2px, 21px 22px, 39px 38px;
+  }
+  90% { 
+    transform: translate(1px, -1px); 
+    background-position: -1px 1px, 19px 19px, 41px 41px;
+  }
 }
 
 /* ensure main content layers above overlay */
-header, .ticker, .container, footer { position: relative; z-index: 100; }
-body > * { position: relative; z-index: 100; }
-
-/* Force all images and text above static */
-img, .logo, .side-gif, h1, h2, h3, h4, h5, h6, p, a, span, div {
-  position: relative;
-  z-index: 100;
-}
+header, .ticker, .container, footer { position: relative; z-index: 1; }
+body > * { position: relative; z-index: 1; }
 
 /* Make headings extra bold and larger */
 h1, h2, h3, h4, h5, h6 {

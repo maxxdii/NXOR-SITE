@@ -82,25 +82,25 @@ header {
   position: absolute; /* anchor to header */
   top: 50%;
   transform: translateY(-50%);
-  width: clamp(220px, 28vw, 520px);
+  width: clamp(340px, 38vw, 700px); /* restore larger, bolder presence */
   height: auto;
   aspect-ratio: 1 / 1;
   background-size: cover;
   background-position: center;
-  opacity: 0.35;
-  mix-blend-mode: normal;
+  opacity: 1; /* solid white */
+  mix-blend-mode: normal; /* no blending */
   pointer-events: none;
   z-index: 1; /* behind header content */
 }
 
 .side-gif.left {
-  left: clamp(12px, 4vw, 48px);
+  left: clamp(24px, 8vw, 160px); /* move inward for better centering */
   background-image: url('left.png');
   filter: none;
 }
 
 .side-gif.right {
-  right: clamp(12px, 4vw, 48px);
+  right: clamp(24px, 8vw, 160px); /* move inward for better centering */
   background-image: url('right.png');
   filter: none;
 }

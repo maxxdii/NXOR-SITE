@@ -6,8 +6,8 @@
 }
 
 body {
-  background-color: #fff;
-  color: #000;
+  background: linear-gradient(180deg, #000 0%, #0a0a0a 50%, #111 100%);
+  color: #fff;
   font-family: 'Noto Sans TC', system-ui, -apple-system, Segoe UI, Roboto, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', Arial, sans-serif;
   line-height: 1.6;
   font-weight: 700; /* bolder base */
@@ -28,12 +28,12 @@ h3 { font-size: clamp(1.3rem, 1.8vw, 1.6rem); }
 header {
   text-align: center;
   padding: 6vh 0 4vh;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #fff;
 }
 
 .topnav {
-  border-bottom: 1px solid #000;
-  background: #fff;
+  border-bottom: 1px solid #fff;
+  background: transparent;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -48,7 +48,7 @@ header {
 }
 
 .topnav a {
-  color: #000;
+  color: #fff;
   text-decoration: none;
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -58,7 +58,7 @@ header {
 
 .ticker {
   overflow: hidden;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #fff;
 }
 
 .ticker__inner {
@@ -69,7 +69,7 @@ header {
   animation: ticker 20s linear infinite;
 }
 
-.ticker span { opacity: 0.8; }
+.ticker span { opacity: 0.9; color: #fff; }
 
 @keyframes ticker {
   0% { transform: translateX(0); }
@@ -105,9 +105,9 @@ header {
 .enter-btn {
   display: inline-block;
   padding: 14px 36px;
-  border: 2px solid #000;
+  border: 2px solid #fff;
   text-decoration: none;
-  color: #000;
+  color: #fff;
   transition: 0.3s;
   font-weight: 800;
   font-size: clamp(1rem, 1.4vw, 1.15rem);
@@ -115,10 +115,7 @@ header {
   font-family: 'Noto Sans TC', system-ui, -apple-system, Segoe UI, Roboto, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', Arial, sans-serif;
 }
 
-.enter-btn:hover {
-  background: #f5f5f5;
-  color: #000;
-}
+.enter-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
 
 .shop-intro {
   text-align: center;
@@ -134,7 +131,7 @@ header {
 
 .product-card {
   text-align: center;
-  border: 1px solid #000;
+  border: 1px solid #fff;
   padding: 16px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
@@ -155,8 +152,8 @@ header {
   position: absolute;
   top: 10px;
   left: 10px;
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #000;
   font-size: 0.75rem;
   padding: 4px 8px;
   font-weight: 900;
@@ -164,7 +161,7 @@ header {
 
 .section-label {
   display: inline-block;
-  border: 1px solid #000;
+  border: 1px solid #fff;
   padding: 4px 10px;
   font-weight: 800;
   margin-bottom: 10px;
@@ -198,20 +195,17 @@ footer {
   padding: 30px;
   font-size: clamp(0.95rem, 1.2vw, 1rem);
   font-weight: 600;
-  border-top: 1px solid #000;
+  border-top: 1px solid #fff;
 }
 
 footer nav a {
   margin: 0 10px;
-  color: #000;
+  color: #fff;
   text-decoration: none;
   font-weight: 700;
 }
 
-footer nav a:hover {
-  color: #000;
-  text-decoration: underline;
-}
+footer nav a:hover { color: #fff; text-decoration: underline; }
 
 .info-page {
   padding: 64px 0;
@@ -223,10 +217,7 @@ footer nav a:hover {
   letter-spacing: 3px;
 }
 
-.info-page ul {
-  list-style: none;
-  color: #000;
-}
+.info-page ul { list-style: none; color: #fff; }
 
 .info-page form {
   display: flex;
@@ -241,9 +232,9 @@ footer nav a:hover {
 .info-page textarea {
   width: 100%;
   padding: 12px;
-  background: #fff;
-  border: 1px solid #000;
-  color: #000;
+  background: #0f0f0f;
+  border: 1px solid #444;
+  color: #fff;
   resize: none;
   font-size: 1rem;
   line-height: 1.4;
@@ -251,15 +242,12 @@ footer nav a:hover {
 
 .info-page button {
   padding: 12px 24px;
-  border: 2px solid #000;
-  background: #fff;
-  color: #000;
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
   cursor: pointer;
   font-weight: 700;
   font-size: 1rem;
 }
 
-.info-page button:hover {
-  background: #f5f5f5;
-  color: #000;
-}
+.info-page button:hover { background: rgba(255,255,255,0.12); color: #fff; }

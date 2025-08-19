@@ -10,6 +10,12 @@ body {
   color: #000;
   font-family: monospace, sans-serif;
   line-height: 1.6;
+  font-weight: 600; /* make base text bolder */
+}
+
+/* Make headings extra bold */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
 }
 
 header {
@@ -36,6 +42,7 @@ header {
   text-decoration: none;
   color: #000;
   transition: 0.3s;
+  font-weight: 700;
 }
 
 .enter-btn:hover {
@@ -81,18 +88,21 @@ header {
   margin-top: 6px;
   color: #000;
   text-decoration: underline;
+  font-weight: 700;
 }
 
 footer {
   text-align: center;
   padding: 30px;
   font-size: 0.8rem;
+  font-weight: 600;
 }
 
 footer nav a {
   margin: 0 10px;
   color: #000;
   text-decoration: none;
+  font-weight: 700;
 }
 
 footer nav a:hover {
@@ -140,6 +150,7 @@ footer nav a:hover {
   background: #fff;
   color: #000;
   cursor: pointer;
+  font-weight: 700;
 }
 
 .info-page button:hover {

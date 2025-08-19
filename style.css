@@ -98,8 +98,8 @@ header {
   height: auto;
   aspect-ratio: 1 / 1;
   filter: none;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+  transform: none;
 }
 
 .side-gif.right {
@@ -111,8 +111,8 @@ header {
   height: auto;
   aspect-ratio: 1 / 1;
   filter: none;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+  transform: none;
 }
 
 @media (max-width: 1024px) {

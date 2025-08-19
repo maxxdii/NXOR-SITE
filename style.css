@@ -8,19 +8,18 @@
 body {
   background-color: #fff;
   color: #000;
-  font-family: 'Oswald', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family: 'Noto Sans TC', system-ui, -apple-system, Segoe UI, Roboto, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', Arial, sans-serif;
   line-height: 1.6;
   font-weight: 700; /* bolder base */
   font-size: clamp(18px, 1.8vw, 22px); /* larger, responsive base size */
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em; /* slightly tighter for CJK */
 }
 
 /* Make headings extra bold and larger */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 900;
-  font-family: 'Bebas Neue', 'Oswald', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-family: 'Noto Sans TC', system-ui, -apple-system, Segoe UI, Roboto, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', Arial, sans-serif;
+  letter-spacing: 0.02em;
 }
 h1 { font-size: clamp(2.2rem, 3vw, 3rem); }
 h2 { font-size: clamp(1.6rem, 2.2vw, 2.2rem); }
@@ -40,10 +39,9 @@ header {
 .tagline {
   font-size: clamp(1.0rem, 2vw, 1.4rem);
   margin-bottom: 30px;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.06em;
   font-weight: 800;
-  font-family: 'Bebas Neue', 'Oswald', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  text-transform: uppercase;
+  font-family: 'Noto Sans TC', system-ui, -apple-system, Segoe UI, Roboto, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', Arial, sans-serif;
 }
 
 .enter-btn {
@@ -55,9 +53,8 @@ header {
   transition: 0.3s;
   font-weight: 800;
   font-size: clamp(1rem, 1.4vw, 1.15rem);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-family: 'Bebas Neue', 'Oswald', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  letter-spacing: 0.04em;
+  font-family: 'Noto Sans TC', system-ui, -apple-system, Segoe UI, Roboto, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', Arial, sans-serif;
 }
 
 .enter-btn:hover {
@@ -97,9 +94,8 @@ header {
   margin: 12px 0 4px;
   font-size: clamp(1.1rem, 1.6vw, 1.4rem);
   font-weight: 800;
-  font-family: 'Bebas Neue', 'Oswald', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: 'Noto Sans TC', system-ui, -apple-system, Segoe UI, Roboto, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', Arial, sans-serif;
+  letter-spacing: 0.03em;
 }
 
 .product-card p { /* e.g., price */
@@ -114,8 +110,7 @@ header {
   text-decoration: underline;
   font-weight: 700;
   font-size: clamp(0.95rem, 1.3vw, 1.05rem);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 footer {

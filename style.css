@@ -19,8 +19,16 @@ body {
   font-weight: 700; /* bolder base */
   font-size: clamp(18px, 1.8vw, 22px); /* larger, responsive base size */
   letter-spacing: 0.01em; /* slightly tighter for CJK */
+}
+
+/* Wrap all content (except the fixed static overlay) so body itself has no transform.
+   This keeps the fixed overlay truly viewport-fixed across the entire page. */
+.page-wrap {
+  position: relative;
+  z-index: 1; /* above noise and scanlines (z=0) */
   transform-origin: 50% 50%;
   animation: pageGlitch 8s infinite; /* brief, noticeable disruption */
+  will-change: transform, filter;
 }
 
 /* Animated noise overlay (live TV static) */
@@ -30,7 +38,7 @@ body {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 0; /* below pngs and text */
+  z-index: 0; /* below content wrapper */
   opacity: 0.32; /* slightly toned down */
   mix-blend-mode: normal; /* overlay directly for visibility */
   will-change: opacity;

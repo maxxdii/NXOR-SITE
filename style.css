@@ -103,6 +103,7 @@ header {
   right: clamp(24px, 8vw, 160px); /* move inward for better centering */
   background-image: url('right.png');
   filter: none;
+  transform: translateY(calc(-50% + 48px)); /* slightly lower than left */
 }
 
 @media (max-width: 1024px) {

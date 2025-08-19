@@ -55,6 +55,18 @@ header {
   font-weight: 800;
   letter-spacing: 0.04em;
 }
+.topnav .nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.topnav .nav-item .translation {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  line-height: 1.1;
+}
 
 .topnav a:hover { text-decoration: underline; }
 

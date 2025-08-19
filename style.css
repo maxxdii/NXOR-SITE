@@ -8,12 +8,11 @@
 body {
   background:
     linear-gradient(180deg, #000 0%, #050505 50%, #000 100%), /* base */
-    url('bg-symbols.svg'), /* symbols */
-    url('noise.svg'); /* tv static */
-  background-repeat: no-repeat, repeat, repeat;
-  background-size: auto, 360px 360px, 160px 160px;
-  background-position: center top, 0 0, 0 0;
-  background-blend-mode: normal, normal, lighten;
+    url('bg-symbols.svg'); /* symbols */
+  background-repeat: no-repeat, repeat;
+  background-size: auto, 360px 360px;
+  background-position: center top, 0 0;
+  background-blend-mode: normal, normal;
   color: #fff;
   font-family: 'Noto Sans TC', system-ui, -apple-system, Segoe UI, Roboto, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', Arial, sans-serif;
   line-height: 1.6;
@@ -22,18 +21,16 @@ body {
   letter-spacing: 0.01em; /* slightly tighter for CJK */
 }
 
-/* Fixed noise overlay so static is always visible but subtle */
-body::before {
-  content: "";
+/* Animated noise overlay (live TV static) */
+.noise-overlay {
   position: fixed;
   inset: 0;
-  background-image: url('noise.svg');
-  background-repeat: repeat;
-  background-size: 80px 80px; /* finer grain */
-  opacity: 0.18; /* stronger but still subtle */
-  mix-blend-mode: screen; /* make white noise show on black */
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
-  z-index: 0;
+  z-index: 0; /* behind main content (which is z-index:1) */
+  opacity: 0.14; /* subtle but visible */
+  mix-blend-mode: screen; /* show on black */
 }
 
 /* Make headings extra bold and larger */

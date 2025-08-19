@@ -76,6 +76,33 @@ header {
   100% { transform: translateX(-50%); }
 }
 
+.side-gif {
+  position: fixed;
+  top: 20vh;
+  width: 140px;
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.side-gif.left {
+  left: 12px;
+  background-image: url('left.gif');
+}
+
+.side-gif.right {
+  right: 12px;
+  background-image: url('right.gif');
+}
+
+@media (max-width: 1024px) {
+  .side-gif { display: none; }
+}
+
 .container {
   width: min(1120px, 92%);
   margin: 0 auto;

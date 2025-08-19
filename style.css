@@ -29,7 +29,7 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 999; /* above content */
-  opacity: 0.28; /* stronger visibility */
+  opacity: 0.45; /* much stronger visibility */
   mix-blend-mode: normal; /* overlay directly for visibility */
 }
 

@@ -22,6 +22,19 @@ body {
   letter-spacing: 0.01em; /* slightly tighter for CJK */
 }
 
+/* Fixed noise overlay so static is always visible but subtle */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url('noise.svg');
+  background-repeat: repeat;
+  background-size: 120px 120px;
+  opacity: 0.12; /* subtle but visible */
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Make headings extra bold and larger */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 900;
@@ -38,6 +51,7 @@ header {
   border-bottom: 1px solid #fff;
   position: relative; /* positioning context for side images */
   overflow: hidden; /* clip side images to header box */
+  z-index: 1; /* above noise overlay */
 }
 
 .topnav {
@@ -80,6 +94,8 @@ header {
 .ticker {
   overflow: hidden;
   border-bottom: 1px solid #fff;
+  position: relative;
+  z-index: 1;
 }
 
 .ticker__inner {
@@ -132,6 +148,8 @@ header {
 .container {
   width: min(1120px, 92%);
   margin: 0 auto;
+  position: relative;
+  z-index: 1; /* lift content above overlay */
 }
 
 .header-inner {

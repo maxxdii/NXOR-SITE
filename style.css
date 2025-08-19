@@ -31,6 +31,51 @@ header {
   border-bottom: 1px solid #000;
 }
 
+.topnav {
+  border-bottom: 1px solid #000;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.topnav .container {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.topnav a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.topnav a:hover { text-decoration: underline; }
+
+.ticker {
+  overflow: hidden;
+  border-bottom: 1px solid #000;
+}
+
+.ticker__inner {
+  display: flex;
+  gap: 48px;
+  white-space: nowrap;
+  padding: 8px 0;
+  animation: ticker 20s linear infinite;
+}
+
+.ticker span { opacity: 0.8; }
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 .container {
   width: min(1120px, 92%);
   margin: 0 auto;
@@ -92,6 +137,7 @@ header {
   border: 1px solid #000;
   padding: 16px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
 }
 
 .product-card img {
@@ -104,6 +150,25 @@ header {
 
 .product-card:hover { transform: translateY(-3px); }
 .product-card img:hover { transform: scale(1.02); }
+
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #000;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  font-weight: 900;
+}
+
+.section-label {
+  display: inline-block;
+  border: 1px solid #000;
+  padding: 4px 10px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
 
 .product-card h3 {
   margin: 12px 0 4px;

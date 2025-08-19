@@ -12,6 +12,13 @@
 </head>
 <body>
   <header>
+  <nav class="topnav" aria-label="グローバルナビゲーション">
+      <div class="container">
+        <a href="#shop">ショップ</a>
+        <a href="#policy">ルール</a>
+        <a href="#contact">連絡</a>
+      </div>
+    </nav>
     <div class="container header-inner">
       <img src="NXOR-logo.png" alt="NXOR ロゴ" class="logo" />
       <p class="tagline">常に黒<br />限定ドロップ。再販なし。</p>
@@ -19,9 +26,17 @@
     </div>
   </header>
 
+  <section class="ticker" aria-hidden="true">
+    <div class="ticker__inner">
+      <span>限定ドロップ • 再販なし • 黒のみ • NXOR</span>
+      <span>限定ドロップ • 再販なし • 黒のみ • NXOR</span>
+    </div>
+  </section>
+
   <main id="shop">
     <div class="container">
       <section class="shop-intro">
+        <p class="section-label">コレクション 01</p>
         <h2>NXOR ショップ</h2>
         <p>私たちは黒だけを売る。黒だけ。永遠に。</p>
       </section>
@@ -29,9 +44,40 @@
       <section class="products">
         <!-- Repeat this block for each product -->
         <div class="product-card">
+          <span class="badge">新作</span>
           <img src="product1.jpg" alt="ブラックTシャツ" />
           <h3>ヴォイドTシャツ</h3>
           <p>$60</p>
+          <a href="#">詳細を見る</a>
+        </div>
+        <div class="product-card">
+          <img src="product2.jpg" alt="ブラックフーディー" />
+          <h3>アビスフーディー</h3>
+          <p>$120</p>
+          <a href="#">詳細を見る</a>
+        </div>
+        <div class="product-card">
+          <img src="product3.jpg" alt="ブラックパンツ" />
+          <h3>ナイトパンツ</h3>
+          <p>$140</p>
+          <a href="#">詳細を見る</a>
+        </div>
+        <div class="product-card">
+          <img src="product4.jpg" alt="ブラックキャップ" />
+          <h3>シャドウキャップ</h3>
+          <p>$45</p>
+          <a href="#">詳細を見る</a>
+        </div>
+        <div class="product-card">
+          <img src="product5.jpg" alt="ブラックジャケット" />
+          <h3>ボイドジャケット</h3>
+          <p>$220</p>
+          <a href="#">詳細を見る</a>
+        </div>
+        <div class="product-card">
+          <img src="product6.jpg" alt="ブラックロングスリーブ" />
+          <h3>ディープLS</h3>
+          <p>$80</p>
           <a href="#">詳細を見る</a>
         </div>
       </section>
@@ -40,7 +86,7 @@
 
   <footer>
     <div class="container footer-inner">
-      <nav>
+  <nav aria-label="フッターナビゲーション">
         <a href="#policy">ルール</a>
         <a href="#contact">お問い合わせ</a>
       </nav>

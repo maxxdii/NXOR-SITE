@@ -6,8 +6,8 @@
 }
 
 body {
-  background-color: #000;
-  color: #fff;
+  background-color: #fff;
+  color: #000;
   font-family: monospace, sans-serif;
   line-height: 1.6;
 }
@@ -32,14 +32,14 @@ header {
 .enter-btn {
   display: inline-block;
   padding: 12px 32px;
-  border: 2px solid #fff;
+  border: 2px solid #000;
   text-decoration: none;
-  color: #fff;
+  color: #000;
   transition: 0.3s;
 }
 
 .enter-btn:hover {
-  background: #fff;
+  background: #f5f5f5;
   color: #000;
 }
 
@@ -79,7 +79,7 @@ header {
 .product-card a {
   display: inline-block;
   margin-top: 6px;
-  color: #fff;
+  color: #000;
   text-decoration: underline;
 }
 
@@ -91,12 +91,13 @@ footer {
 
 footer nav a {
   margin: 0 10px;
-  color: #888;
+  color: #000;
   text-decoration: none;
 }
 
 footer nav a:hover {
-  color: #fff;
+  color: #000;
+  text-decoration: underline;
 }
 
 .info-page {
@@ -111,7 +112,7 @@ footer nav a:hover {
 
 .info-page ul {
   list-style: none;
-  color: #aaa;
+  color: #000;
 }
 
 .info-page form {
@@ -127,21 +128,21 @@ footer nav a:hover {
 .info-page textarea {
   width: 100%;
   padding: 12px;
-  background: #111;
-  border: 1px solid #444;
-  color: #fff;
+  background: #fff;
+  border: 1px solid #000;
+  color: #000;
   resize: none;
 }
 
 .info-page button {
   padding: 10px 20px;
-  border: 2px solid #fff;
-  background: transparent;
-  color: #fff;
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
   cursor: pointer;
 }
 
 .info-page button:hover {
-  background: #fff;
+  background: #f5f5f5;
   color: #000;
 }

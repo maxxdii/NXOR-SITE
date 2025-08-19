@@ -10,13 +10,15 @@ body {
   color: #000;
   font-family: monospace, sans-serif;
   line-height: 1.6;
-  font-weight: 600; /* make base text bolder */
+  font-weight: 700; /* bolder base */
+  font-size: clamp(18px, 1.8vw, 22px); /* larger, responsive base size */
 }
 
-/* Make headings extra bold */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 800;
-}
+/* Make headings extra bold and larger */
+h1, h2, h3, h4, h5, h6 { font-weight: 900; }
+h1 { font-size: clamp(2.2rem, 3vw, 3rem); }
+h2 { font-size: clamp(1.6rem, 2.2vw, 2.2rem); }
+h3 { font-size: clamp(1.3rem, 1.8vw, 1.6rem); }
 
 header {
   text-align: center;
@@ -30,19 +32,21 @@ header {
 }
 
 .tagline {
-  font-size: 1rem;
+  font-size: clamp(1.0rem, 2vw, 1.4rem);
   margin-bottom: 30px;
   letter-spacing: 2px;
+  font-weight: 800;
 }
 
 .enter-btn {
   display: inline-block;
-  padding: 12px 32px;
+  padding: 14px 36px;
   border: 2px solid #000;
   text-decoration: none;
   color: #000;
   transition: 0.3s;
-  font-weight: 700;
+  font-weight: 800;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
 }
 
 .enter-btn:hover {
@@ -80,7 +84,13 @@ header {
 
 .product-card h3 {
   margin: 12px 0 4px;
-  font-size: 1.1rem;
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-weight: 800;
+}
+
+.product-card p { /* e.g., price */
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  font-weight: 700;
 }
 
 .product-card a {
@@ -89,12 +99,13 @@ header {
   color: #000;
   text-decoration: underline;
   font-weight: 700;
+  font-size: clamp(0.95rem, 1.3vw, 1.05rem);
 }
 
 footer {
   text-align: center;
   padding: 30px;
-  font-size: 0.8rem;
+  font-size: clamp(0.95rem, 1.2vw, 1rem);
   font-weight: 600;
 }
 
@@ -142,15 +153,18 @@ footer nav a:hover {
   border: 1px solid #000;
   color: #000;
   resize: none;
+  font-size: 1rem;
+  line-height: 1.4;
 }
 
 .info-page button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: 2px solid #000;
   background: #fff;
   color: #000;
   cursor: pointer;
   font-weight: 700;
+  font-size: 1rem;
 }
 
 .info-page button:hover {

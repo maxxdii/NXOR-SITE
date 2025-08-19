@@ -13,6 +13,8 @@ body {
   font-weight: 700; /* bolder base */
   font-size: clamp(18px, 1.8vw, 22px); /* larger, responsive base size */
   letter-spacing: 0.01em; /* slightly tighter for CJK */
+  position: relative; /* create stacking context */
+  z-index: 0;
 }
 
 /* Strong live static overlay */
@@ -22,7 +24,7 @@ body {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 0; /* keep it behind all content */
+  z-index: -1; /* force under all body children */
   mix-blend-mode: normal;
   opacity: 0.42; /* loud by default */
 }

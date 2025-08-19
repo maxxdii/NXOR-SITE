@@ -97,6 +97,12 @@ header {
 .side-gif.right {
   right: 12px;
   background-image: url('right.png');
+  opacity: 1;
+  mix-blend-mode: normal;
+  width: clamp(220px, 26vw, 420px);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  filter: none;
 }
 
 @media (max-width: 1024px) {

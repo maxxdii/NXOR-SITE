@@ -29,6 +29,8 @@ header {
   text-align: center;
   padding: 6vh 0 4vh;
   border-bottom: 1px solid #fff;
+  position: relative; /* positioning context for side images */
+  overflow: hidden; /* clip side images to header box */
 }
 
 .topnav {
@@ -77,37 +79,29 @@ header {
 }
 
 .side-gif {
-  position: absolute; /* anchor to the page, not the viewport */
-  top: 0; /* stick to top edge */
-  width: 140px;
-  height: 140px;
+  position: absolute; /* anchor to header */
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(220px, 28vw, 520px);
+  height: auto;
+  aspect-ratio: 1 / 1;
   background-size: cover;
   background-position: center;
-  opacity: 0.25;
-  mix-blend-mode: screen;
+  opacity: 0.35;
+  mix-blend-mode: normal;
   pointer-events: none;
-  z-index: 5;
+  z-index: 1; /* behind header content */
 }
 
 .side-gif.left {
-  left: clamp(48px, 12vw, 240px);
+  left: clamp(12px, 4vw, 48px);
   background-image: url('left.png');
-  opacity: 1;
-  mix-blend-mode: normal;
-  width: clamp(340px, 38vw, 700px);
-  height: auto;
-  aspect-ratio: 1 / 1;
   filter: none;
 }
 
 .side-gif.right {
-  right: clamp(48px, 12vw, 240px);
+  right: clamp(12px, 4vw, 48px);
   background-image: url('right.png');
-  opacity: 1;
-  mix-blend-mode: normal;
-  width: clamp(340px, 38vw, 700px);
-  height: auto;
-  aspect-ratio: 1 / 1;
   filter: none;
 }
 

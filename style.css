@@ -19,6 +19,8 @@ body {
   font-weight: 700; /* bolder base */
   font-size: clamp(18px, 1.8vw, 22px); /* larger, responsive base size */
   letter-spacing: 0.01em; /* slightly tighter for CJK */
+  transform-origin: 50% 50%;
+  animation: pageGlitch 8s infinite; /* brief, noticeable disruption */
 }
 
 /* Animated noise overlay (live TV static) */
@@ -31,40 +33,48 @@ body {
   z-index: 0; /* below pngs and text */
   opacity: 0.32; /* slightly toned down */
   mix-blend-mode: normal; /* overlay directly for visibility */
-  will-change: transform, opacity;
-  animation: vhsFlicker 7s infinite;
+  will-change: opacity;
+  animation: noiseBoost 8s infinite linear; /* spike during glitch */
 }
 
-/* VHS scanline flash during flicker window */
-.noise-overlay::after {
+/* Scanline overlay that flashes only during the glitch window */
+body::after {
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.10) 0px,
-    rgba(255,255,255,0.10) 1px,
-    transparent 2px,
-    transparent 3px
-  );
+  pointer-events: none;
+  z-index: 0; /* keep under content like the noise */
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.0) 0px,
+      rgba(255,255,255,0.0) 7px,
+      rgba(255,255,255,0.14) 8px,
+      rgba(255,255,255,0.14) 9px
+    );
   mix-blend-mode: screen;
   opacity: 0;
-  animation: vhsScan 7s infinite;
+  animation: barsFlash 8s infinite linear;
 }
 
-@keyframes vhsFlicker {
-  0%, 88%, 100% { opacity: 0.30; transform: translate3d(0,0,0) skewX(0deg); }
-  90% { opacity: 0.34; transform: translate3d(0.2px,0,0) skewX(0.1deg); }
-  92% { opacity: 0.27; transform: translate3d(-0.2px,0,0) skewX(-0.1deg); }
-  94% { opacity: 0.36; transform: translate3d(0.4px,0,0) skewX(0.2deg); }
-  96% { opacity: 0.32; transform: translate3d(0,0,0) skewX(0deg); }
+@keyframes pageGlitch {
+  0%, 95%, 100% { transform: none; filter: none; }
+  96% { transform: translate3d(-2px, 0, 0) skewX(-0.6deg); filter: contrast(1.2) saturate(1.1); }
+  97% { transform: translate3d(3px, 0, 0) skewX(0.8deg); filter: contrast(1.5) saturate(1.25) hue-rotate(4deg); }
+  98% { transform: translate3d(-1px, 0, 0) skewX(-0.4deg); filter: contrast(1.25); }
+  99% { transform: none; filter: none; }
 }
 
-@keyframes vhsScan {
-  0%, 88%, 100% { opacity: 0; background-position: 0 0; }
-  91% { opacity: 0.12; background-position: 0 2px; }
-  94% { opacity: 0.08; background-position: 0 -2px; }
-  96% { opacity: 0; background-position: 0 0; }
+@keyframes noiseBoost {
+  0%, 95%, 100% { opacity: 0.32; }
+  96%, 98% { opacity: 0.55; }
+  99% { opacity: 0.32; }
+}
+
+@keyframes barsFlash {
+  0%, 95%, 100% { opacity: 0; }
+  96%, 98% { opacity: 0.18; }
+  99% { opacity: 0; }
 }
 
 /* Make headings extra bold and larger */

@@ -77,8 +77,8 @@ header {
 }
 
 .side-gif {
-  position: absolute;
-  top: 0;
+  position: absolute; /* anchor to the page, not the viewport */
+  top: 0; /* stick to top edge */
   width: 140px;
   height: 140px;
   background-size: cover;
@@ -98,8 +98,6 @@ header {
   height: auto;
   aspect-ratio: 1 / 1;
   filter: none;
-  top: 0;
-  transform: none;
 }
 
 .side-gif.right {
@@ -111,8 +109,6 @@ header {
   height: auto;
   aspect-ratio: 1 / 1;
   filter: none;
-  top: 0;
-  transform: none;
 }
 
 @media (max-width: 1024px) {

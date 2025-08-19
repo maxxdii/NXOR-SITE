@@ -91,12 +91,12 @@ header {
 
 .side-gif.left {
   left: 12px;
-  background-image: url('left.gif');
+  background-image: url('left.png');
 }
 
 .side-gif.right {
   right: 12px;
-  background-image: url('right.gif');
+  background-image: url('right.png');
 }
 
 @media (max-width: 1024px) {

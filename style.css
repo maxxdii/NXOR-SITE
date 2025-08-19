@@ -94,13 +94,13 @@ header {
 }
 
 .side-gif.left {
-  left: clamp(24px, 8vw, 160px); /* move inward for better centering */
+  left: clamp(8px, 5vw, 96px); /* closer to the left edge */
   background-image: url('left.png');
   filter: none;
 }
 
 .side-gif.right {
-  right: clamp(24px, 8vw, 160px); /* move inward for better centering */
+  right: clamp(8px, 5vw, 96px); /* closer to the right edge */
   background-image: url('right.png');
   filter: none;
   transform: translateY(calc(-50% + 48px)); /* slightly lower than left */

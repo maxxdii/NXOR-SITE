@@ -6,7 +6,12 @@
 }
 
 body {
-  background: linear-gradient(180deg, #000 0%, #050505 50%, #000 100%);
+  background:
+    linear-gradient(180deg, #000 0%, #050505 50%, #000 100%),
+    url('bg-symbols.svg');
+  background-repeat: no-repeat, repeat;
+  background-size: auto, 360px 360px; /* large, subtle tiles */
+  background-position: center top, 0 0;
   color: #fff;
   font-family: 'Noto Sans TC', system-ui, -apple-system, Segoe UI, Roboto, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', Arial, sans-serif;
   line-height: 1.6;

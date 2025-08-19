@@ -15,6 +15,7 @@ body {
   letter-spacing: 0.01em; /* slightly tighter for CJK */
   position: relative; /* create stacking context */
   z-index: 0;
+  isolation: isolate; /* ensure negative z elements sit under all body children */
 }
 
 /* Strong live static overlay */
@@ -24,7 +25,7 @@ body {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: -1; /* force under all body children */
+  z-index: -9999; /* force far under all body children */
   mix-blend-mode: normal;
   opacity: 0.42; /* loud by default */
 }

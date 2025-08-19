@@ -90,11 +90,11 @@ header {
 }
 
 .side-gif.left {
-  left: clamp(12px, 5vw, 96px);
+  left: clamp(48px, 12vw, 240px);
   background-image: url('left.png');
   opacity: 1;
   mix-blend-mode: normal;
-  width: clamp(260px, 30vw, 520px);
+  width: clamp(340px, 38vw, 700px);
   height: auto;
   aspect-ratio: 1 / 1;
   filter: none;
@@ -103,11 +103,11 @@ header {
 }
 
 .side-gif.right {
-  right: clamp(12px, 5vw, 96px);
+  right: clamp(48px, 12vw, 240px);
   background-image: url('right.png');
   opacity: 1;
   mix-blend-mode: normal;
-  width: clamp(260px, 30vw, 520px);
+  width: clamp(340px, 38vw, 700px);
   height: auto;
   aspect-ratio: 1 / 1;
   filter: none;

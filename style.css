@@ -29,6 +29,7 @@ body {
 
 /* ensure main content layers above overlay */
 header, .ticker, .container, footer { position: relative; z-index: 1; }
+body > * { position: relative; z-index: 1; }
 
 /* Make headings extra bold and larger */
 h1, h2, h3, h4, h5, h6 {

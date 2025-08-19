@@ -1,0 +1,147 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: monospace, sans-serif;
+  line-height: 1.6;
+}
+
+header {
+  text-align: center;
+  padding: 5vh 0;
+}
+
+.logo {
+  width: 300px;
+  max-width: 80vw;
+  margin-bottom: 20px;
+}
+
+.tagline {
+  font-size: 1rem;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+}
+
+.enter-btn {
+  display: inline-block;
+  padding: 12px 32px;
+  border: 2px solid #fff;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.enter-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+.shop-intro {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px;
+}
+
+.product-card {
+  width: 220px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  filter: grayscale(100%);
+  transition: 0.3s;
+}
+
+.product-card img:hover {
+  filter: grayscale(0%);
+}
+
+.product-card h3 {
+  margin: 12px 0 4px;
+  font-size: 1.1rem;
+}
+
+.product-card a {
+  display: inline-block;
+  margin-top: 6px;
+  color: #fff;
+  text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  font-size: 0.8rem;
+}
+
+footer nav a {
+  margin: 0 10px;
+  color: #888;
+  text-decoration: none;
+}
+
+footer nav a:hover {
+  color: #fff;
+}
+
+.info-page {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.info-page h2 {
+  margin-bottom: 20px;
+  letter-spacing: 3px;
+}
+
+.info-page ul {
+  list-style: none;
+  color: #aaa;
+}
+
+.info-page form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.info-page input,
+.info-page textarea {
+  width: 100%;
+  padding: 12px;
+  background: #111;
+  border: 1px solid #444;
+  color: #fff;
+  resize: none;
+}
+
+.info-page button {
+  padding: 10px 20px;
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.info-page button:hover {
+  background: #fff;
+  color: #000;
+}

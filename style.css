@@ -35,14 +35,15 @@ body {
   animation: noiseGlitch 6s infinite;
 }
 
+/* flash subtle scanlines during glitch */
 .noise-overlay::after {
   content: "";
   position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(255, 255, 255, 0.14) 0px,
-    rgba(255, 255, 255, 0.14) 1px,
+    rgba(255, 255, 255, 0.12) 0px,
+    rgba(255, 255, 255, 0.12) 1px,
     transparent 2px,
     transparent 3px
   );

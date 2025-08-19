@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,55 +12,65 @@
 </head>
 <body>
   <header>
-  <img src="NXOR-logo.png" alt="NXOR ロゴ" class="logo" />
-    <p class="tagline">常に黒<br />限定ドロップ。再販なし。</p>
-    <a href="#shop" class="enter-btn">ショップへ</a>
+    <div class="container header-inner">
+      <img src="NXOR-logo.png" alt="NXOR ロゴ" class="logo" />
+      <p class="tagline">常に黒<br />限定ドロップ。再販なし。</p>
+      <a href="#shop" class="enter-btn">ショップへ</a>
+    </div>
   </header>
 
   <main id="shop">
-    <section class="shop-intro">
-  <h2>NXOR ショップ</h2>
-  <p>私たちは黒だけを売る。黒だけ。永遠に。</p>
-    </section>
+    <div class="container">
+      <section class="shop-intro">
+        <h2>NXOR ショップ</h2>
+        <p>私たちは黒だけを売る。黒だけ。永遠に。</p>
+      </section>
 
-    <section class="products">
-      <!-- Repeat this block for each product -->
-      <div class="product-card">
-        <img src="product1.jpg" alt="Black Shirt" />
-  <h3>ヴォイドTシャツ</h3>
-  <p>$60</p>
-  <a href="#">詳細を見る</a>
-      </div>
-    </section>
+      <section class="products">
+        <!-- Repeat this block for each product -->
+        <div class="product-card">
+          <img src="product1.jpg" alt="ブラックTシャツ" />
+          <h3>ヴォイドTシャツ</h3>
+          <p>$60</p>
+          <a href="#">詳細を見る</a>
+        </div>
+      </section>
+    </div>
   </main>
 
   <footer>
-    <nav>
-  <a href="#policy">ルール</a>
-  <a href="#contact">お問い合わせ</a>
-    </nav>
-    <p>© NXOR MMXXV</p>
+    <div class="container footer-inner">
+      <nav>
+        <a href="#policy">ルール</a>
+        <a href="#contact">お問い合わせ</a>
+      </nav>
+      <p>© NXOR MMXXV</p>
+    </div>
   </footer>
 
   <!-- POLICIES -->
   <section id="policy" class="info-page">
-    <h2>ルール</h2>
-    <ul>
-      <li>返品不可</li>
-      <li>キャンセル不可</li>
-      <li>全て最終販売</li>
-      <li>クリック＝購入の確定。</li>
-    </ul>
+    <div class="container">
+      <h2>ルール</h2>
+      <ul>
+        <li>返品不可</li>
+        <li>キャンセル不可</li>
+        <li>全て最終販売</li>
+        <li>クリック＝購入の確定。</li>
+      </ul>
+    </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact" class="info-page">
-    <h2>NXORへの連絡</h2>
-    <form>
-      <input type="email" placeholder="メールアドレス" required />
-      <textarea placeholder="メッセージ" required></textarea>
-      <button type="submit">送信</button>
-    </form>
+    <div class="container">
+      <h2>NXORへの連絡</h2>
+      <form>
+        <input type="email" placeholder="メールアドレス" required />
+        <textarea placeholder="メッセージ" required></textarea>
+        <button type="submit">送信</button>
+      </form>
+    </div>
   </section>
 </body>
 </html>

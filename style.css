@@ -6,7 +6,7 @@
 }
 
 body {
-  background: linear-gradient(180deg, #000 0%, #0a0a0a 50%, #111 100%);
+  background: transparent; /* let the static show through */
   color: #fff;
   font-family: 'Noto Sans TC', system-ui, -apple-system, Segoe UI, Roboto, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', Arial, sans-serif;
   line-height: 1.6;
@@ -23,12 +23,13 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: 
-    radial-gradient(circle at 20% 80%, transparent 20%, rgba(255,255,255,0.03) 21%, rgba(255,255,255,0.03) 29%, transparent 30%),
-    radial-gradient(circle at 80% 20%, transparent 20%, rgba(255,255,255,0.03) 21%, rgba(255,255,255,0.03) 29%, transparent 30%),
-    radial-gradient(circle at 40% 40%, transparent 20%, rgba(255,255,255,0.05) 21%, rgba(255,255,255,0.05) 29%, transparent 30%);
-  background-size: 50px 50px, 80px 80px, 60px 60px;
-  opacity: 0.4;
+  background: 
+    linear-gradient(180deg, #000 0%, #0a0a0a 50%, #111 100%), /* base gradient */
+    radial-gradient(circle at 20% 80%, transparent 20%, rgba(255,255,255,0.08) 21%, rgba(255,255,255,0.08) 29%, transparent 30%),
+    radial-gradient(circle at 80% 20%, transparent 20%, rgba(255,255,255,0.08) 21%, rgba(255,255,255,0.08) 29%, transparent 30%),
+    radial-gradient(circle at 40% 40%, transparent 20%, rgba(255,255,255,0.12) 21%, rgba(255,255,255,0.12) 29%, transparent 30%);
+  background-size: 100% 100%, 50px 50px, 80px 80px, 60px 60px;
+  opacity: 1; /* make it fully visible */
   animation: staticNoise 0.1s linear infinite;
   pointer-events: none;
   z-index: -1;
@@ -37,43 +38,43 @@ body::before {
 @keyframes staticNoise {
   0%, 100% { 
     transform: translate(0px, 0px); 
-    background-position: 0 0, 20px 20px, 40px 40px;
+    background-position: 0 0, 0 0, 20px 20px, 40px 40px;
   }
   10% { 
     transform: translate(-2px, 2px); 
-    background-position: 2px 2px, 22px 18px, 38px 42px;
+    background-position: 0 0, 2px 2px, 22px 18px, 38px 42px;
   }
   20% { 
     transform: translate(2px, -2px); 
-    background-position: -2px -2px, 18px 22px, 42px 38px;
+    background-position: 0 0, -2px -2px, 18px 22px, 42px 38px;
   }
   30% { 
     transform: translate(-1px, -1px); 
-    background-position: 1px 1px, 21px 19px, 39px 41px;
+    background-position: 0 0, 1px 1px, 21px 19px, 39px 41px;
   }
   40% { 
     transform: translate(1px, 1px); 
-    background-position: -1px -1px, 19px 21px, 41px 39px;
+    background-position: 0 0, -1px -1px, 19px 21px, 41px 39px;
   }
   50% { 
     transform: translate(-2px, 0px); 
-    background-position: 2px 0px, 22px 20px, 38px 40px;
+    background-position: 0 0, 2px 0px, 22px 20px, 38px 40px;
   }
   60% { 
     transform: translate(2px, 2px); 
-    background-position: -2px -2px, 18px 18px, 42px 42px;
+    background-position: 0 0, -2px -2px, 18px 18px, 42px 42px;
   }
   70% { 
     transform: translate(0px, -2px); 
-    background-position: 0px 2px, 20px 22px, 40px 38px;
+    background-position: 0 0, 0px 2px, 20px 22px, 40px 38px;
   }
   80% { 
     transform: translate(-1px, 2px); 
-    background-position: 1px -2px, 21px 22px, 39px 38px;
+    background-position: 0 0, 1px -2px, 21px 22px, 39px 38px;
   }
   90% { 
     transform: translate(1px, -1px); 
-    background-position: -1px 1px, 19px 19px, 41px 41px;
+    background-position: 0 0, -1px 1px, 19px 19px, 41px 41px;
   }
 }
 

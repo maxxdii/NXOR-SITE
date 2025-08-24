@@ -333,24 +333,21 @@
         grid-template-columns: 1fr;
         gap: 2rem;
         padding: 0 1rem;
+        max-width: 100%;
       }
       
       .product-images {
         position: static;
-        order: 1;
+        order: -1; /* Show images first on mobile */
       }
       
-      .product-details {
-        order: 2;
-      }
-      
-      .main-product-image img {
-        aspect-ratio: 3/4;
+      .main-product-image {
+        margin-bottom: 0.5rem;
       }
       
       .product-thumbnails {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0.4rem;
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        gap: 0.3rem;
       }
       
       .thumbnail img {
@@ -358,23 +355,23 @@
       }
       
       .product-details h1 {
-        font-size: clamp(1.3rem, 4vw, 1.8rem);
-        margin-bottom: 0.8rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
       }
       
       .product-price {
-        font-size: clamp(1.1rem, 3vw, 1.3rem);
-        margin-bottom: 1.2rem;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
       }
       
       .payment-info {
-        padding: 0.8rem;
+        padding: 0.75rem;
         margin-bottom: 1.5rem;
       }
       
       .payment-info p {
-        font-size: 0.85rem;
-        margin-bottom: 0.8rem;
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
       }
       
       .payment-logos {
@@ -384,35 +381,26 @@
       
       .payment-logo {
         height: 25px;
-        padding: 3px 6px;
         font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
       }
       
-      .variant-selection {
+      .variant-selector {
         margin-bottom: 1.5rem;
       }
       
-      .variant-group {
-        margin-bottom: 1.2rem;
-      }
-      
       .variant-label {
-        font-size: 0.85rem;
-        margin-bottom: 0.4rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
       }
       
       .variant-options {
-        gap: 0.4rem;
+        gap: 0.5rem;
       }
       
       .variant-option {
-        padding: 0.6rem 0.8rem;
+        padding: 0.5rem 1rem;
         font-size: 0.75rem;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        touch-action: manipulation;
       }
       
       .quantity-selector {
@@ -420,165 +408,117 @@
       }
       
       .quantity-controls {
-        gap: 0.8rem;
+        gap: 0.75rem;
       }
       
       .quantity-input {
         width: 50px;
-        padding: 0.6rem 0.4rem;
-        font-size: 0.9rem;
-        touch-action: manipulation;
+        padding: 0.4rem;
       }
       
       .quantity-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 1.1rem;
-        touch-action: manipulation;
+        width: 25px;
+        height: 25px;
       }
       
       .product-actions {
-        gap: 0.8rem;
+        gap: 0.75rem;
         margin-bottom: 1.5rem;
       }
       
-      .add-to-cart-main {
-        padding: 1rem 2rem;
-        font-size: 1rem;
-        min-height: 48px;
-        touch-action: manipulation;
+      .add-to-cart-main,
+      .shop-pay-btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
       }
       
-      .shop-pay-btn {
-        padding: 0.9rem 1.5rem;
-        font-size: 0.95rem;
-        min-height: 48px;
-        touch-action: manipulation;
+      .product-info-tabs {
+        padding-top: 1.5rem;
       }
       
       .tab-buttons {
-        gap: 0.5rem;
-        margin-bottom: 1.5rem;
         flex-wrap: wrap;
+        gap: 0.5rem;
       }
       
       .tab-btn {
-        padding: 0.6rem 0.8rem;
+        padding: 0.5rem 1rem;
         font-size: 0.85rem;
-        min-height: 40px;
-        touch-action: manipulation;
+        flex: 1;
+        min-width: 120px;
       }
       
       .tab-content {
         padding: 1rem 0;
       }
       
-      .tab-content h3 {
-        font-size: 1.1rem;
-        margin-bottom: 0.8rem;
+      .tab-content p {
+        font-size: 0.9rem;
+        line-height: 1.5;
       }
       
-      .size-chart-table {
-        font-size: 0.85rem;
-        overflow-x: auto;
-        display: block;
-        white-space: nowrap;
+      .size-chart table {
+        font-size: 0.8rem;
       }
       
-      .size-chart-table th,
-      .size-chart-table td {
-        padding: 0.4rem 0.3rem;
+      .size-chart th,
+      .size-chart td {
+        padding: 0.5rem 0.25rem;
       }
     }
     
+    /* Additional mobile styles for smaller screens */
     @media (max-width: 480px) {
-      .product-page {
-        padding: 0.5rem 0;
-      }
-      
       .product-container {
         padding: 0 0.75rem;
         gap: 1.5rem;
       }
       
-      .product-thumbnails {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      
-      .thumbnail img {
-        height: 50px;
-      }
-      
       .product-details h1 {
-        font-size: 1.4rem;
-        margin-bottom: 0.6rem;
+        font-size: 1.25rem;
       }
       
       .product-price {
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+      
+      .variant-options {
+        gap: 0.25rem;
+      }
+      
+      .variant-option {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+      }
+      
+      .product-actions {
+        gap: 0.5rem;
+      }
+      
+      .add-to-cart-main,
+      .shop-pay-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+      }
+      
+      .tab-btn {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        min-width: 100px;
       }
       
       .payment-info {
-        padding: 0.6rem;
-        margin-bottom: 1.2rem;
+        padding: 0.5rem;
       }
       
       .payment-logos {
-        gap: 0.3rem;
-        flex-wrap: wrap;
+        gap: 0.25rem;
       }
       
       .payment-logo {
         height: 20px;
-        padding: 2px 4px;
-        font-size: 0.6rem;
-      }
-      
-      .variant-option {
-        padding: 0.5rem 0.6rem;
-        font-size: 0.7rem;
-        min-height: 40px;
-      }
-      
-      .quantity-input {
-        width: 45px;
-        padding: 0.5rem 0.3rem;
-        font-size: 0.85rem;
-      }
-      
-      .quantity-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 1rem;
-      }
-      
-      .add-to-cart-main {
-        padding: 0.9rem 1.5rem;
-        font-size: 0.95rem;
-        min-height: 44px;
-      }
-      
-      .shop-pay-btn {
-        padding: 0.8rem 1.2rem;
-        font-size: 0.9rem;
-        min-height: 44px;
-      }
-      
-      .tab-btn {
-        padding: 0.5rem 0.6rem;
-        font-size: 0.8rem;
-        min-height: 36px;
-        flex: 1;
-      }
-      
-      .size-chart-table {
-        font-size: 0.75rem;
-      }
-      
-      .size-chart-table th,
-      .size-chart-table td {
-        padding: 0.3rem 0.2rem;
+        font-size: 0.65rem;
+        padding: 0.2rem 0.4rem;
       }
     }
   </style>

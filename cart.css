@@ -380,24 +380,12 @@
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-  .cart-page {
-    padding-top: 80px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
   .cart-header h1 {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    margin-bottom: 2rem;
-  }
-  
-  .cart-content {
-    gap: 2rem;
+    font-size: 2rem;
   }
   
   .cart-item {
-    grid-template-columns: 80px 1fr;
-    grid-template-rows: auto auto;
+    grid-template-columns: 80px 1fr auto;
     gap: 12px;
     padding: 16px;
   }
@@ -413,207 +401,24 @@
   
   .cart-item-title {
     font-size: 1rem;
-    line-height: 1.4;
-  }
-  
-  .cart-item-variant {
-    font-size: 0.85rem;
-  }
-  
-  .cart-item-price {
-    font-size: 1rem;
-  }
-  
-  .cart-item-total {
-    font-size: 1.1rem;
   }
   
   .quantity-controls {
-    grid-column: 1 / -1;
+    grid-column: 2;
     grid-row: 2;
     justify-self: start;
     margin-top: 12px;
-    gap: 8px;
-  }
-  
-  .quantity-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 1.1rem;
-    touch-action: manipulation;
-  }
-  
-  .quantity-input {
-    width: 50px;
-    padding: 0.4rem;
-    font-size: 1rem;
-    touch-action: manipulation;
+    scale: 0.9;
   }
   
   .remove-item {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 36px;
-    height: 36px;
-    font-size: 1.2rem;
-    touch-action: manipulation;
+    grid-column: 3;
+    grid-row: 1;
+    align-self: start;
   }
   
   .summary-card {
     position: static;
-    margin-top: 2rem;
-    padding: 24px;
-  }
-  
-  .summary-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-  }
-  
-  .summary-row {
-    font-size: 0.95rem;
-    margin-bottom: 12px;
-  }
-  
-  .summary-row.total {
-    font-size: 1.2rem;
-    margin-bottom: 24px;
-  }
-  
-  .checkout-btn {
-    padding: 16px;
-    font-size: 1rem;
-    margin-bottom: 12px;
-    touch-action: manipulation;
-    min-height: 44px;
-  }
-  
-  .continue-shopping-btn {
-    padding: 12px 24px;
-    font-size: 0.9rem;
-    touch-action: manipulation;
-    min-height: 44px;
-  }
-  
-  .continue-shopping-link {
-    font-size: 0.85rem;
-    margin-top: 8px;
-    touch-action: manipulation;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .cart-page {
-    padding-top: 70px;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-  
-  .cart-header h1 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .cart-content {
-    gap: 1.5rem;
-  }
-  
-  .cart-item {
-    padding: 12px;
-    gap: 10px;
-  }
-  
-  .cart-item-image {
-    width: 70px;
-    height: 70px;
-  }
-  
-  .cart-item-title {
-    font-size: 0.9rem;
-  }
-  
-  .cart-item-variant {
-    font-size: 0.8rem;
-  }
-  
-  .cart-item-price {
-    font-size: 0.9rem;
-  }
-  
-  .cart-item-total {
-    font-size: 1rem;
-  }
-  
-  .quantity-controls {
-    margin-top: 8px;
-    gap: 6px;
-  }
-  
-  .quantity-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 1rem;
-  }
-  
-  .quantity-input {
-    width: 45px;
-    padding: 0.3rem;
-    font-size: 0.9rem;
-  }
-  
-  .remove-item {
-    width: 32px;
-    height: 32px;
-    font-size: 1.1rem;
-    top: 8px;
-    right: 8px;
-  }
-  
-  .summary-card {
-    padding: 20px;
-  }
-  
-  .summary-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 16px;
-  }
-  
-  .summary-row {
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-  }
-  
-  .summary-row.total {
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-  }
-  
-  .checkout-btn {
-    padding: 14px;
-    font-size: 0.95rem;
-  }
-  
-  .cart-empty {
-    padding: 48px 16px;
-  }
-  
-  .empty-icon {
-    font-size: 3rem;
-    margin-bottom: 16px;
-  }
-  
-  .cart-empty h3 {
-    font-size: 1.3rem;
-    margin-bottom: 6px;
-  }
-  
-  .cart-empty p {
-    margin-bottom: 24px;
-    font-size: 0.9rem;
+    margin-top: 32px;
   }
 }

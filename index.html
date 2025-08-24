@@ -8,8 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=4" />
   <meta name="description" content="NXOR — 常に黒。限定リリース。再販なし。" />
+  
+  <!-- Shopify Integration Scripts -->
+  <script type="module" src="shopify-config.js?v=3"></script>
+  <script type="module" src="shopify-integration.js?v=3"></script>
 </head>
 <body>
   <header>
@@ -26,6 +30,18 @@
         <div class="nav-item">
           <a href="#contact">連絡</a>
           <div class="translation" aria-hidden="true">Contact</div>
+        </div>
+        <div class="nav-item cart-nav">
+          <a href="cart.html" class="cart-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="m1 1 4 4 0 9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H7"></path>
+            </svg>
+            <span class="cart-text">カート</span>
+            <span class="cart-count">0</span>
+          </a>
+          <div class="translation" aria-hidden="true">Cart</div>
         </div>
       </div>
     </nav>
@@ -45,81 +61,320 @@
 
   <section class="ticker" aria-hidden="true">
     <div class="ticker__inner">
-      <span>限定ドロップ • 再販なし • 黒のみ • NXOR</span>
-      <span>限定ドロップ • 再販なし • 黒のみ • NXOR</span>
+      <span translate="no">限定ドロップ • 再販なし • 黒のみ • NXOR</span>
+      <span translate="no">限定ドロップ • 再販なし • 黒のみ • NXOR</span>
     </div>
+    <div class="translation ticker-translation" aria-hidden="true">Limited Drops • No Restocks • Black Only • NXOR</div>
   </section>
 
   <main id="shop">
     <div class="container">
       <section class="shop-intro">
-  <p class="section-label">コレクション 01</p>
+  <p class="section-label" translate="no">コレクション 01</p>
+  <div class="translation" aria-hidden="true">Collection 01</div>
   <h2 translate="no">NXOR ショップ</h2>
   <div class="translation" aria-hidden="true">NXOR Shop</div>
   <p translate="no">私たちは黒だけを売る。黒だけ。永遠に。</p>
   <div class="translation" aria-hidden="true">We sell black. Only black. Forever.</div>
       </section>
 
+      <!-- Featured Collection Cards -->
+      <section class="featured-cards">
+        <div class="card-grid">
+          <div class="feature-card card-1">
+            <img src="image1.png" alt="NXOR Featured Item 1" />
+            <div class="card-overlay">
+              <h3>VOID COLLECTION</h3>
+              <p>Premium Streetwear</p>
+            </div>
+          </div>
+          
+          <div class="feature-card card-2">
+            <img src="image2.png" alt="NXOR Featured Item 2" />
+            <div class="card-overlay">
+              <h3>SHADOW SERIES</h3>
+              <p>Limited Edition</p>
+            </div>
+          </div>
+          
+          <div class="feature-card card-3">
+            <img src="image3.png" alt="NXOR Featured Item 3" />
+            <div class="card-overlay">
+              <h3>ABYSS LINE</h3>
+              <p>Exclusive Drop</p>
+            </div>
+          </div>
+          
+          <div class="feature-card card-4">
+            <img src="image4.png" alt="NXOR Featured Item 4" />
+            <div class="card-overlay">
+              <h3>DARK EDITION</h3>
+              <p>Core Collection</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="products">
-        <!-- Repeat this block for each product -->
-        <div class="product-card" translate="no">
-          <span class="badge">新作</span>
-          <img src="product1.jpg" alt="ブラックTシャツ" />
-          <h3>ヴォイドTシャツ</h3>
-          <div class="translation" aria-hidden="true">Void Tee</div>
-          <p>$60</p>
-          <a href="#">詳細を見る</a>
-          <div class="translation" aria-hidden="true">View</div>
+        <!-- Products will be dynamically loaded from Shopify -->
+        <!-- Fallback static products (will be replaced by Shopify data) -->
+        <div class="product-card" translate="no" data-product-handle="void-tee">
+          <span class="badge new">新作</span>
+          <div class="product-image">
+            <img src="product1.jpg" alt="ブラックTシャツ" />
+            <div class="image-overlay">
+              <span class="overlay-text">詳細を見る</span>
+              <div class="translation" aria-hidden="true">View Details</div>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3>ヴォイドTシャツ</h3>
+            <div class="translation" aria-hidden="true">Void Tee</div>
+            <div class="product-description">
+              <span translate="no">オーバーサイズフィット・ヘビーウェイト・100% コットン</span>
+              <div class="translation" aria-hidden="true">Oversized Fit • Heavy Weight • 100% Cotton</div>
+            </div>
+            <div class="size-info">
+              <span class="size-label">サイズ:</span>
+              <div class="translation size-label" aria-hidden="true">Sizes:</div>
+              <div class="sizes">
+                <span class="size">S</span>
+                <span class="size">M</span>
+                <span class="size">L</span>
+                <span class="size">XL</span>
+                <span class="size">XXL</span>
+              </div>
+            </div>
+            <div class="price">$60</div>
+            <button onclick="addToCart('gid://shopify/ProductVariant/VARIANT_ID_1')" class="add-to-cart-btn">
+              Add to Cart
+            </button>
+            <div class="translation" aria-hidden="true">カートに追加</div>
+            <a href="product.html?handle=void-tee" class="view-details-link">
+              <span translate="no">詳細を見る</span>
+              <div class="translation" aria-hidden="true">View Details</div>
+            </a>
+          </div>
         </div>
-        <div class="product-card" translate="no">
-          <img src="product2.jpg" alt="ブラックフーディー" />
-          <h3>アビスフーディー</h3>
-          <div class="translation" aria-hidden="true">Abyss Hoodie</div>
-          <p>$120</p>
-          <a href="#">詳細を見る</a>
-          <div class="translation" aria-hidden="true">View</div>
+        <div class="product-card" translate="no" data-product-handle="abyss-hoodie">
+          <div class="product-image">
+            <img src="product2.jpg" alt="ブラックフーディー" />
+            <div class="image-overlay">
+              <span class="overlay-text">詳細を見る</span>
+              <div class="translation" aria-hidden="true">View Details</div>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3>アビスフーディー</h3>
+            <div class="translation" aria-hidden="true">Abyss Hoodie</div>
+            <div class="product-description">
+              <span translate="no">リラックスフィット・ミディアムウェイト・フリース裏地</span>
+              <div class="translation" aria-hidden="true">Relaxed Fit • Medium Weight • Fleece Lined</div>
+            </div>
+            <div class="size-info">
+              <span class="size-label">サイズ:</span>
+              <div class="translation size-label" aria-hidden="true">Sizes:</div>
+              <div class="sizes">
+                <span class="size">S</span>
+                <span class="size">M</span>
+                <span class="size">L</span>
+                <span class="size">XL</span>
+                <span class="size">XXL</span>
+              </div>
+            </div>
+            <div class="price">$120</div>
+            <button onclick="addToCart('gid://shopify/ProductVariant/VARIANT_ID_2')" class="add-to-cart-btn">
+              Add to Cart
+            </button>
+            <div class="translation" aria-hidden="true">カートに追加</div>
+            <a href="product.html?handle=abyss-hoodie" class="view-details-link">
+              <span translate="no">詳細を見る</span>
+              <div class="translation" aria-hidden="true">View Details</div>
+            </a>
+          </div>
         </div>
-        <div class="product-card" translate="no">
-          <img src="product3.jpg" alt="ブラックパンツ" />
-          <h3>ナイトパンツ</h3>
-          <div class="translation" aria-hidden="true">Night Pants</div>
-          <p>$140</p>
-          <a href="#">詳細を見る</a>
-          <div class="translation" aria-hidden="true">View</div>
+        <div class="product-card" translate="no" data-product-handle="shadow-pants">
+          <span class="badge limited">限定</span>
+          <div class="product-image">
+            <img src="product3.jpg" alt="ブラックパンツ" />
+            <div class="image-overlay">
+              <span class="overlay-text">詳細を見る</span>
+              <div class="translation" aria-hidden="true">View Details</div>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3>シャドウパンツ</h3>
+            <div class="translation" aria-hidden="true">Shadow Pants</div>
+            <div class="product-description">
+              <span translate="no">テーパードフィット・ライトウェイト・ポリエステル混紡</span>
+              <div class="translation" aria-hidden="true">Tapered Fit • Light Weight • Poly Blend</div>
+            </div>
+            <div class="size-info">
+              <span class="size-label">サイズ:</span>
+              <div class="translation size-label" aria-hidden="true">Sizes:</div>
+              <div class="sizes">
+                <span class="size">S</span>
+                <span class="size">M</span>
+                <span class="size">L</span>
+                <span class="size">XL</span>
+                <span class="size">XXL</span>
+              </div>
+            </div>
+            <div class="price">$140</div>
+            <button onclick="addToCart('gid://shopify/ProductVariant/VARIANT_ID_3')" class="add-to-cart-btn">
+              Add to Cart
+            </button>
+            <div class="translation" aria-hidden="true">カートに追加</div>
+            <a href="product.html?handle=shadow-pants" class="view-details-link">
+              <span translate="no">詳細を見る</span>
+              <div class="translation" aria-hidden="true">View Details</div>
+            </a>
+          </div>
         </div>
-        <div class="product-card" translate="no">
-          <img src="product4.jpg" alt="ブラックキャップ" />
-          <h3>シャドウキャップ</h3>
-          <div class="translation" aria-hidden="true">Shadow Cap</div>
-          <p>$45</p>
-          <a href="#">詳細を見る</a>
-          <div class="translation" aria-hidden="true">View</div>
+        <div class="product-card" translate="no" data-product-handle="shadow-cap">
+          <span class="badge sold-out">完売</span>
+          <div class="product-image">
+            <img src="product4.jpg" alt="ブラックキャップ" />
+            <div class="image-overlay">
+              <span class="overlay-text">詳細を見る</span>
+              <div class="translation" aria-hidden="true">View Details</div>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3>シャドウキャップ</h3>
+            <div class="translation" aria-hidden="true">Shadow Cap</div>
+            <div class="product-description">
+              <span translate="no">アジャスタブル・ライトウェイト・コットンツイル</span>
+              <div class="translation" aria-hidden="true">Adjustable • Light Weight • Cotton Twill</div>
+            </div>
+            <div class="size-info">
+              <span class="size-label">サイズ:</span>
+              <div class="translation size-label" aria-hidden="true">Sizes:</div>
+              <div class="sizes">
+                <span class="size one-size">フリー</span>
+                <div class="translation" aria-hidden="true">One Size</div>
+              </div>
+            </div>
+            <div class="price">$45</div>
+            <button onclick="addToCart('gid://shopify/ProductVariant/VARIANT_ID_4')" class="add-to-cart-btn" disabled>
+              Sold Out
+            </button>
+            <div class="translation" aria-hidden="true">完売</div>
+            <a href="product.html?handle=shadow-cap" class="view-details-link">
+              <span translate="no">詳細を見る</span>
+              <div class="translation" aria-hidden="true">View Details</div>
+            </a>
+          </div>
         </div>
-        <div class="product-card" translate="no">
-          <img src="product5.jpg" alt="ブラックジャケット" />
-          <h3>ボイドジャケット</h3>
-          <div class="translation" aria-hidden="true">Void Jacket</div>
-          <p>$220</p>
-          <a href="#">詳細を見る</a>
-          <div class="translation" aria-hidden="true">View</div>
+        <div class="product-card" translate="no" data-product-handle="void-jacket">
+          <div class="product-image">
+            <img src="product5.jpg" alt="ブラックジャケット" />
+            <div class="image-overlay">
+              <span class="overlay-text">詳細を見る</span>
+              <div class="translation" aria-hidden="true">View Details</div>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3>ボイドジャケット</h3>
+            <div class="translation" aria-hidden="true">Void Jacket</div>
+            <div class="product-description">
+              <span translate="no">オーバーサイズフィット・ヘビーウェイト・ナイロン防水</span>
+              <div class="translation" aria-hidden="true">Oversized Fit • Heavy Weight • Nylon Waterproof</div>
+            </div>
+            <div class="size-info">
+              <span class="size-label">サイズ:</span>
+              <div class="translation size-label" aria-hidden="true">Sizes:</div>
+              <div class="sizes">
+                <span class="size">S</span>
+                <span class="size">M</span>
+                <span class="size">L</span>
+                <span class="size">XL</span>
+                <span class="size">XXL</span>
+              </div>
+            </div>
+            <div class="price">$220</div>
+            <button onclick="addToCart('gid://shopify/ProductVariant/VARIANT_ID_5')" class="add-to-cart-btn">
+              Add to Cart
+            </button>
+            <div class="translation" aria-hidden="true">カートに追加</div>
+            <a href="product.html?handle=void-jacket" class="view-details-link">
+              <span translate="no">詳細を見る</span>
+              <div class="translation" aria-hidden="true">View Details</div>
+            </a>
+          </div>
         </div>
-        <div class="product-card" translate="no">
-          <img src="product6.jpg" alt="ブラックロングスリーブ" />
-          <h3>ディープLS</h3>
-          <div class="translation" aria-hidden="true">Deep LS</div>
-          <p>$80</p>
-          <a href="#">詳細を見る</a>
-          <div class="translation" aria-hidden="true">View</div>
+        <div class="product-card" translate="no" data-product-handle="deep-ls">
+          <div class="product-image">
+            <img src="product6.jpg" alt="ブラックロングスリーブ" />
+            <div class="image-overlay">
+              <span class="overlay-text">詳細を見る</span>
+              <div class="translation" aria-hidden="true">View Details</div>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3>ディープLS</h3>
+            <div class="translation" aria-hidden="true">Deep LS</div>
+            <div class="product-description">
+              <span translate="no">レギュラーフィット・ミディアムウェイト・100% コットン</span>
+              <div class="translation" aria-hidden="true">Regular Fit • Medium Weight • 100% Cotton</div>
+            </div>
+            <div class="size-info">
+              <span class="size-label">サイズ:</span>
+              <div class="translation size-label" aria-hidden="true">Sizes:</div>
+              <div class="sizes">
+                <span class="size">S</span>
+                <span class="size">M</span>
+                <span class="size">L</span>
+                <span class="size">XL</span>
+                <span class="size">XXL</span>
+              </div>
+            </div>
+            <div class="price">$80</div>
+            <button onclick="addToCart('gid://shopify/ProductVariant/VARIANT_ID_6')" class="add-to-cart-btn">
+              Add to Cart
+            </button>
+            <div class="translation" aria-hidden="true">カートに追加</div>
+            <a href="product.html?handle=deep-ls" class="view-details-link">
+              <span translate="no">詳細を見る</span>
+              <div class="translation" aria-hidden="true">View Details</div>
+            </a>
+          </div>
         </div>
       </section>
     </div>
   </main>
 
+  <!-- CART -->
+  <section id="cart" class="info-page">
+    <div class="container">
+      <h2 translate="no">カート</h2>
+      <div class="translation" aria-hidden="true">Cart</div>
+      
+      <div class="cart-content">
+        <div class="empty-cart">
+          <div class="empty-cart-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="m1 1 4 4 0 9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H7"></path>
+            </svg>
+          </div>
+          <p translate="no">カートは空です</p>
+          <div class="translation" aria-hidden="true">Your cart is empty</div>
+          <a href="#shop" class="continue-shopping" translate="no">ショッピングを続ける</a>
+          <div class="translation" aria-hidden="true">Continue Shopping</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <div class="container footer-inner">
   <nav aria-label="フッターナビゲーション">
-        <a href="#policy">ルール</a>
-        <a href="#contact">お問い合わせ</a>
+        <a href="#policy" translate="no">ルール</a>
+        <div class="translation" aria-hidden="true">Rules</div>
+        <a href="#contact" translate="no">お問い合わせ</a>
+        <div class="translation" aria-hidden="true">Contact</div>
       </nav>
       <p>© NXOR MMXXV</p>
     </div>
@@ -128,12 +383,17 @@
   <!-- POLICIES -->
   <section id="policy" class="info-page">
     <div class="container">
-      <h2>ルール</h2>
+      <h2 translate="no">ルール</h2>
+      <div class="translation" aria-hidden="true">Rules</div>
       <ul>
-        <li>返品不可</li>
-        <li>キャンセル不可</li>
-        <li>全て最終販売</li>
-        <li>クリック＝購入の確定。</li>
+        <li translate="no">返品不可</li>
+        <div class="translation" aria-hidden="true">No Returns</div>
+        <li translate="no">キャンセル不可</li>
+        <div class="translation" aria-hidden="true">No Cancellations</div>
+        <li translate="no">全て最終販売</li>
+        <div class="translation" aria-hidden="true">All Sales Final</div>
+        <li translate="no">クリック＝購入の確定。</li>
+        <div class="translation" aria-hidden="true">Click = Purchase Confirmed</div>
       </ul>
     </div>
   </section>
@@ -141,13 +401,90 @@
   <!-- CONTACT -->
   <section id="contact" class="info-page">
     <div class="container">
-      <h2>NXORへの連絡</h2>
+      <h2 translate="no">NXORへの連絡</h2>
+      <div class="translation" aria-hidden="true">Contact NXOR</div>
       <form>
         <input type="email" placeholder="メールアドレス" required />
+        <div class="translation input-translation" aria-hidden="true">Email Address</div>
         <textarea placeholder="メッセージ" required></textarea>
-        <button type="submit">送信</button>
+        <div class="translation input-translation" aria-hidden="true">Message</div>
+        <button type="submit" translate="no">送信</button>
+        <div class="translation" aria-hidden="true">Send</div>
       </form>
     </div>
   </section>
+
+  <!-- Floating Cart Icon -->
+  <button class="floating-cart" onclick="window.location.href='cart.html'" aria-label="View cart">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="9" cy="21" r="1"></circle>
+      <circle cx="20" cy="21" r="1"></circle>
+      <path d="m1 1 4 4 0 9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H7"></path>
+    </svg>
+    <span class="floating-cart-count">0</span>
+  </button>
+
+  <script>
+    // Enhanced grid parallax effect
+    document.addEventListener('DOMContentLoaded', function() {
+      let mouseX = 0;
+      let mouseY = 0;
+      let targetX = 0;
+      let targetY = 0;
+      
+      document.addEventListener('mousemove', function(e) {
+        mouseX = (e.clientX / window.innerWidth) * 100;
+        mouseY = (e.clientY / window.innerHeight) * 100;
+      });
+      
+      function updateParallax() {
+        targetX += (mouseX - targetX) * 0.02;
+        targetY += (mouseY - targetY) * 0.02;
+        
+        // Apply subtle parallax to body background
+        document.body.style.setProperty('--mouse-x', targetX + '%');
+        document.body.style.setProperty('--mouse-y', targetY + '%');
+        
+        requestAnimationFrame(updateParallax);
+      }
+      
+      updateParallax();
+      
+      // Grid fade effect on sections
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        section.addEventListener('mouseenter', function() {
+          this.style.setProperty('--grid-opacity', '0.02');
+        });
+        
+        section.addEventListener('mouseleave', function() {
+          this.style.setProperty('--grid-opacity', '0.008');
+        });
+      });
+    });
+    
+    // Size selection functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add click handlers to all size elements
+      const sizeElements = document.querySelectorAll('.size');
+      
+      sizeElements.forEach(size => {
+        size.addEventListener('click', function() {
+          // Remove active class from siblings
+          const siblings = this.parentNode.querySelectorAll('.size');
+          siblings.forEach(sibling => sibling.classList.remove('active'));
+          
+          // Add active class to clicked size
+          this.classList.add('active');
+          
+          // Store selected size (could be used for cart functionality)
+          const productCard = this.closest('.product-card');
+          if (productCard) {
+            productCard.dataset.selectedSize = this.textContent.trim();
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>

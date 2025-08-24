@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details - NXOR</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Product page specific styles */
+    .product-page {
+      min-height: 100vh;
+      padding: 2rem 0;
+    }
+    
+    .product-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    
+    .product-images {
+      position: sticky;
+      top: 2rem;
+    }
+    
+    .main-product-image {
+      width: 100%;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .main-product-image img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+    }
+    
+    .product-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 0.5rem;
+    }
+    
+    .thumbnail {
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    
+    .thumbnail.active,
+    .thumbnail:hover {
+      opacity: 1;
+    }
+    
+    .thumbnail img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+    }
+    
+    .product-details h1 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    
+    .product-price {
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      font-weight: 700;
+      color: #7877c6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .payment-info {
+      background: rgba(120, 119, 198, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(120, 119, 198, 0.3);
+    }
+    
+    .payment-info p {
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .payment-logos {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .payment-logo {
+      height: 30px;
+      background: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #333;
+    }
+    
+    .variant-selection {
+      margin-bottom: 2rem;
+    }
+    
+    .variant-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .variant-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .variant-options {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .variant-option {
+      padding: 0.5rem 1rem;
+      border: 2px solid #444;
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      font-size: 0.8rem;
+    }
+    
+    .variant-option:hover,
+    .variant-option.selected {
+      border-color: #7877c6;
+      background: rgba(120, 119, 198, 0.2);
+    }
+    
+    .quantity-selector {
+      margin-bottom: 2rem;
+    }
+    
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .quantity-input {
+      width: 60px;
+      padding: 0.5rem;
+      text-align: center;
+      background: #0f0f0f;
+      border: 1px solid #444;
+      color: #fff;
+      border-radius: 4px;
+    }
+    
+    .quantity-btn {
+      width: 30px;
+      height: 30px;
+      background: #7877c6;
+      border: none;
+      color: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    
+    .product-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .add-to-cart-main {
+      background: #000;
+      color: #fff;
+      border: 2px solid #fff;
+      padding: 1.2rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .add-to-cart-main::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    .add-to-cart-main:hover {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 
+        0 10px 30px rgba(255, 255, 255, 0.25),
+        0 6px 15px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+    
+    .add-to-cart-main:hover::before {
+      left: 100%;
+    }
+    
+    .add-to-cart-main:active {
+      transform: translateY(-2px) scale(0.98);
+      box-shadow: 
+        0 6px 20px rgba(255, 255, 255, 0.2),
+        0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .shop-pay-btn {
+      background: #5a31f4;
+      color: #fff;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .shop-pay-btn:hover {
+      background: #6b42f5;
+      transform: translateY(-2px);
+    }
+    
+    .product-info-tabs {
+      border-top: 1px solid #444;
+      padding-top: 2rem;
+    }
+    
+    .tab-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .tab-btn {
+      background: transparent;
+      border: 1px solid #444;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .tab-btn.active,
+    .tab-btn:hover {
+      border-color: #7877c6;
+      background: rgba(120, 119, 198, 0.1);
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .size-chart-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    
+    .size-chart-table th,
+    .size-chart-table td {
+      border: 1px solid #444;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+    
+    .size-chart-table th {
+      background: rgba(120, 119, 198, 0.2);
+      font-weight: 600;
+    }
+    
+    @media (max-width: 768px) {
+      .product-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .product-images {
+        position: static;
+      }
+      
+      .payment-logos {
+        gap: 0.5rem;
+      }
+      
+      .payment-logo {
+        height: 25px;
+        font-size: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation (same as main site) -->
+  <header>
+    <nav class="topnav">
+      <div class="container">
+        <div class="nav-item">
+          <a href="index.html">ホーム</a>
+          <div class="translation" aria-hidden="true">Home</div>
+        </div>
+        <div class="nav-item">
+          <a href="index.html#shop">ショップ</a>
+          <div class="translation" aria-hidden="true">Shop</div>
+        </div>
+        <div class="nav-item">
+          <a href="index.html#policy">ルール</a>
+          <div class="translation" aria-hidden="true">Rules</div>
+        </div>
+        <div class="nav-item">
+          <a href="index.html#contact">連絡</a>
+          <div class="translation" aria-hidden="true">Contact</div>
+        </div>
+        <div class="nav-item cart-nav">
+          <a href="cart.html" class="cart-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="m1 1 4 4 0 9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H7"></path>
+            </svg>
+            <span class="cart-text">カート</span>
+            <span class="cart-count">0</span>
+          </a>
+          <div class="translation" aria-hidden="true">Cart</div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Product Page Content -->
+  <main class="product-page">
+    <div class="product-container">
+      <!-- Product Images -->
+      <div class="product-images">
+        <div class="main-product-image">
+          <img id="mainProductImg" src="" alt="Product Image">
+        </div>
+        <div class="product-thumbnails" id="productThumbnails">
+          <!-- Thumbnails will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Product Details -->
+      <div class="product-details">
+        <h1 id="productTitle">Loading...</h1>
+        <div class="translation" id="productTitleEn">Product Name</div>
+        
+        <div class="product-price" id="productPrice">$0.00</div>
+
+        <!-- Payment Info -->
+        <div class="payment-info">
+          <p>Pay over time for orders over $35.00 with Shop Pay</p>
+          
+          <div style="margin: 1rem 0;">
+            <strong>Secure checkout with:</strong>
+          </div>
+          
+          <div class="payment-logos">
+            <div class="payment-logo">Mastercard</div>
+            <div class="payment-logo">Visa</div>
+            <div class="payment-logo">Amex</div>
+            <div class="payment-logo">Apple Pay</div>
+          </div>
+        </div>
+
+        <!-- Variant Selection -->
+        <div class="variant-selection">
+          <div class="variant-group" id="colorGroup" style="display: none;">
+            <label class="variant-label">Color / カラー</label>
+            <div class="variant-options" id="colorOptions">
+              <!-- Color options will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <div class="variant-group" id="sizeGroup" style="display: none;">
+            <label class="variant-label">Size / サイズ</label>
+            <div class="variant-options" id="sizeOptions">
+              <!-- Size options will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Quantity -->
+        <div class="quantity-selector">
+          <label class="variant-label">Quantity / 数量</label>
+          <div class="quantity-controls">
+            <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+            <input type="number" id="quantity" class="quantity-input" value="1" min="1">
+            <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+          </div>
+        </div>
+
+        <!-- Product Actions -->
+        <div class="product-actions">
+          <button class="add-to-cart-main" onclick="addToCartFromProduct()">
+            Add to Cart
+          </button>
+          
+          <button class="shop-pay-btn" onclick="window.location.href='cart.html'">
+            <span>�</span>
+            Proceed to Cart
+          </button>
+        </div>
+
+        <!-- Product Info Tabs -->
+        <div class="product-info-tabs">
+          <div class="tab-buttons">
+            <button class="tab-btn active" onclick="showTab('description')">Description</button>
+            <button class="tab-btn" onclick="showTab('sizechart')">Size Chart</button>
+          </div>
+
+          <div id="description" class="tab-content active">
+            <h3>Item Description / 商品説明</h3>
+            <div id="productDescription">
+              Loading product description...
+            </div>
+          </div>
+
+          <div id="sizechart" class="tab-content">
+            <h3>Size Chart / サイズチャート</h3>
+            <table class="size-chart-table">
+              <thead>
+                <tr>
+                  <th>Size</th>
+                  <th>Chest (cm)</th>
+                  <th>Length (cm)</th>
+                  <th>Sleeve (cm)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>S</td>
+                  <td>96-101</td>
+                  <td>69</td>
+                  <td>20</td>
+                </tr>
+                <tr>
+                  <td>M</td>
+                  <td>101-106</td>
+                  <td>72</td>
+                  <td>21</td>
+                </tr>
+                <tr>
+                  <td>L</td>
+                  <td>106-111</td>
+                  <td>75</td>
+                  <td>22</td>
+                </tr>
+                <tr>
+                  <td>XL</td>
+                  <td>111-116</td>
+                  <td>78</td>
+                  <td>23</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Floating Cart Icon -->
+  <button class="floating-cart" onclick="window.location.href='cart.html'" aria-label="View cart">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="9" cy="21" r="1"></circle>
+      <circle cx="20" cy="21" r="1"></circle>
+      <path d="m1 1 4 4 0 9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H7"></path>
+    </svg>
+    <span class="floating-cart-count">0</span>
+  </button>
+
+  <!-- Scripts -->
+  <script type="module" src="shopify-config.js"></script>
+  <script type="module" src="shopify-integration.js"></script>
+  <script type="module" src="product-page.js"></script>
+</body>
+</html>

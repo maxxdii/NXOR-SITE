@@ -28,6 +28,7 @@ Then visit http://localhost:8080
 Place these in the repo root next to `index.html`:
 
 - `NXOR-logo.png` – the black spiky NXOR PNG
+- `feature1.jpg`, `feature2.jpg`, `feature3.jpg`, `feature4.jpg` – large feature collection images (500x500px minimum, arranged in 2x2 grid)
 - `product1.jpg`, `product2.jpg`, ... – dark, minimal product images
 
 ## Next steps

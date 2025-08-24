@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Product Page</title>
+</head>
+<body>
+  <h1>Testing Product Page</h1>
+  <p>Open this page and check the console for debugging information.</p>
+  
+  <script>
+    // Test function to see what products are available
+    async function testShopifyConnection() {
+      try {
+        // Import the Shopify client
+        const { SHOPIFY_CONFIG, ShopifyClient } = await import('./shopify-config.js');
+        const client = new ShopifyClient(SHOPIFY_CONFIG.domain, SHOPIFY_CONFIG.token);
+        
+        // Get first few products
+        const products = await client.getProducts(5);
+        console.log('Available products:', products);
+        
+        // List product handles
+        products.edges.forEach((edge, index) => {
+          const product = edge.node;
+          console.log(`Product ${index + 1}:`, product.title, 'Handle:', product.handle);
+          
+          // Create a test link
+          const link = document.createElement('a');
+          link.href = `product.html?handle=${product.handle}`;
+          link.textContent = `Test: ${product.title}`;
+          link.style.display = 'block';
+          link.style.margin = '10px 0';
+          link.style.color = '#7877c6';
+          document.body.appendChild(link);
+        });
+        
+      } catch (error) {
+        console.error('Error testing Shopify connection:', error);
+      }
+    }
+    
+    // Run test when page loads
+    testShopifyConnection();
+  </script>
+</body>
+</html>

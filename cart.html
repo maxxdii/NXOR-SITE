@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart - NXOR</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cart.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <header>
+  <nav class="topnav" aria-label="Global navigation">
+      <div class="container" translate="no">
+        <div class="nav-item">
+          <a href="index.html#shop">Shop</a>
+        </div>
+        <div class="nav-item">
+          <a href="index.html#policy">Rules</a>
+        </div>
+        <div class="nav-item">
+          <a href="index.html#contact">Contact</a>
+        </div>
+        <div class="nav-item cart-nav">
+          <a href="cart.html" class="cart-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="m1 1 4 4 0 9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H7"></path>
+            </svg>
+            <span class="cart-text">Cart</span>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Cart Page Content -->
+  <div class="cart-page">
+    <div class="container">
+      <div class="cart-header">
+        <h1>Shopping Cart</h1>
+      </div>
+
+      <div class="cart-content">
+        <div class="cart-items-section">
+          <div class="cart-empty" id="cartEmpty" style="display: none;">
+            <div class="empty-icon">🛒</div>
+            <h3>Your cart is empty</h3>
+            <p>Add items to start shopping</p>
+            <a href="index.html#shop" class="continue-shopping-btn">
+              Continue Shopping
+            </a>
+          </div>
+
+          <div class="cart-items" id="cartItems">
+            <!-- Cart items will be populated here -->
+          </div>
+        </div>
+
+        <div class="cart-summary">
+          <div class="summary-card">
+            <h3>Order Summary</h3>
+            
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="subtotal">$0.00</span>
+            </div>
+            
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span id="shipping">Calculated at checkout</span>
+            </div>
+            
+            <div class="summary-row">
+              <span>Tax</span>
+              <span id="tax">Calculated at checkout</span>
+            </div>
+            
+            <div class="summary-divider"></div>
+            
+            <div class="summary-row total">
+              <span>Total</span>
+              <span id="total">$0.00</span>
+            </div>
+
+            <button class="checkout-btn" id="checkoutBtn" onclick="proceedToCheckout()" disabled>
+              Proceed to Checkout
+            </button>
+
+            <a href="index.html#shop" class="continue-shopping-link">
+              ← Continue Shopping
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <nav aria-label="Footer navigation">
+        <a href="index.html#policy" translate="no">Rules</a>
+        <a href="index.html#contact" translate="no">Contact</a>
+      </nav>
+      <p>© NXOR MMXXV</p>
+    </div>
+  </footer>
+
+  <!-- Floating Cart Icon -->
+  <button class="floating-cart" onclick="window.location.href='cart.html'" aria-label="View cart">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="9" cy="21" r="1"></circle>
+      <circle cx="20" cy="21" r="1"></circle>
+      <path d="m1 1 4 4 0 9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H7"></path>
+    </svg>
+    <span class="floating-cart-count">0</span>
+  </button>
+
+  <!-- Scripts -->
+  <script type="module" src="shopify-config.js?v=2"></script>
+  <script type="module" src="shopify-integration.js?v=2"></script>
+  <script type="module" src="cart-page.js?v=2"></script>
+</body>
+</html>

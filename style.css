@@ -653,17 +653,11 @@ header::after {
   margin-bottom: 12px;
 }
 
-/* Footer navigation translations */
-footer nav .translation {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.7rem;
-  opacity: 0.6;
-  margin-top: 2px;
-  white-space: nowrap;
-}
+/* Footer navigation translations — hide to avoid overlap/clutter */
+footer nav .translation { display: none !important; }
+
+/* Policy section: hide translation duplicates under Japanese */
+#policy .translation { display: none !important; }
 
 /* Shop collection translation */
 .shop-intro .translation {
@@ -1349,6 +1343,30 @@ footer {
   font-weight: 500; /* lighter */
   border-top: 1px solid #fff;
   position: relative;
+}
+
+/* Footer layout refinements */
+.footer-inner nav { 
+  display: flex; 
+  justify-content: center; 
+  flex-wrap: wrap; 
+  gap: 10px 18px; 
+  margin-bottom: 8px;
+}
+
+.footer-inner p { 
+  margin-top: 6px; 
+}
+
+footer p a { 
+  color: #fff; 
+  text-decoration: underline; 
+}
+
+.payments { 
+  opacity: 0.9; 
+  font-size: 0.9em; 
+  margin-top: 4px; 
 }
 
 footer::before {

@@ -149,8 +149,20 @@ class ProductPage {
   renderProduct() {
     if (!this.product) return;
 
-    // Update page title
-    document.title = `${this.product.title} - NXOR`;
+    // Update page title (unique per product)
+    document.title = `${this.product.title} | NXOR`;
+
+    // Update meta description (first sentence/160 chars)
+    const rawDesc = (this.product.description || '').replace(/\s+/g, ' ').trim();
+    const cutoff = rawDesc.split(/[。.!?]/)[0] || rawDesc;
+    const metaDesc = (cutoff || rawDesc || 'All-black streetwear by NXOR.').slice(0, 160);
+    let meta = document.head.querySelector('meta[name="description"]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute('name', 'description');
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute('content', metaDesc);
 
     // Render product title
     document.getElementById('productTitle').textContent = this.product.title;
@@ -174,6 +186,22 @@ class ProductPage {
 
     // Initialize with first available variant
     this.selectDefaultVariant();
+
+    // Inject Product JSON-LD (guarded)
+    try {
+      if (typeof window.__NXOR__renderProductJsonLd === 'function') {
+        window.__NXOR__renderProductJsonLd(this.product);
+      } else {
+        // Defer once in case inline script loads later
+        setTimeout(() => {
+          if (typeof window.__NXOR__renderProductJsonLd === 'function') {
+            window.__NXOR__renderProductJsonLd(this.product);
+          }
+        }, 0);
+      }
+    } catch (e) {
+      console.warn('Product JSON-LD injection failed', e);
+    }
   }
 
   renderImages() {
@@ -189,11 +217,11 @@ class ProductPage {
     const thumbnailsContainer = document.getElementById('productThumbnails');
     thumbnailsContainer.innerHTML = '';
 
-    images.forEach((image, index) => {
+  images.forEach((image, index) => {
       const thumbnail = document.createElement('div');
       thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
       thumbnail.innerHTML = `
-        <img src="${image.node.originalSrc}" alt="${image.node.altText || this.product.title}">
+    <img src="${image.node.originalSrc}" alt="${image.node.altText || this.product.title}" loading="lazy">
       `;
       thumbnail.onclick = () => this.switchMainImage(image.node.originalSrc, thumbnail);
       thumbnailsContainer.appendChild(thumbnail);

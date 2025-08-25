@@ -39,7 +39,7 @@ const SHOPIFY_CONFIG = {
   // Replace with your Storefront Access Token
   storefrontAccessToken: 'your_actual_token_here',
   
-  apiVersion: '2024-01'
+  apiVersion: '2024-07'
 };
 ```
 

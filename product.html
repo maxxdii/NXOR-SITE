@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Details - NXOR</title>
+  <meta name="description" content="Premium all-black streetwear. Oversized fits and heavy-weight materials by NXOR.">
   <link rel="stylesheet" href="style.css">
   
   <!-- Favicon -->
@@ -432,16 +433,12 @@
         margin-bottom: 1.5rem;
       }
       
-      .add-to-cart-main,
-      .shop-pay-btn {
-        padding: 0.75rem 1.5rem;
-        font-size: 0.9rem;
-      }
-
-      /* Use sticky mobile CTA; hide big CTAs to avoid duplicates */
+      /* Use sticky mobile CTA; hide big CTAs to avoid duplicates and tweak sizing */
       .add-to-cart-main,
       .shop-pay-btn {
         display: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
       }
 
       /* Reserve space for sticky footer */
@@ -514,7 +511,7 @@
       }
       
       .add-to-cart-main,
-      .shop-pay-btn {
+      .shop-pay-btn { /* keep hidden; sizing retained for consistency */
         padding: 0.6rem 1rem;
         font-size: 0.85rem;
       }
@@ -584,7 +581,7 @@
       <!-- Product Images -->
       <div class="product-images">
         <div class="main-product-image">
-          <img id="mainProductImg" src="" alt="Product Image">
+          <img id="mainProductImg" src="" alt="NXOR product">
         </div>
         <div class="product-thumbnails" id="productThumbnails">
           <!-- Thumbnails will be populated by JavaScript -->
@@ -617,14 +614,14 @@
         <!-- Variant Selection -->
         <div class="variant-selection">
           <div class="variant-group" id="colorGroup" style="display: none;">
-            <label class="variant-label">Color / カラー</label>
+            <div class="variant-label">Color / カラー</div>
             <div class="variant-options" id="colorOptions">
               <!-- Color options will be populated by JavaScript -->
             </div>
           </div>
 
           <div class="variant-group" id="sizeGroup" style="display: none;">
-            <label class="variant-label">Size / サイズ</label>
+            <div class="variant-label">Size / サイズ</div>
             <div class="variant-options" id="sizeOptions">
               <!-- Size options will be populated by JavaScript -->
             </div>
@@ -633,7 +630,7 @@
 
         <!-- Quantity -->
         <div class="quantity-selector">
-          <label class="variant-label">Quantity / 数量</label>
+          <label class="variant-label" for="quantity">Quantity / 数量</label>
           <div class="quantity-controls">
             <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
             <input type="number" id="quantity" class="quantity-input" value="1" min="1">
@@ -733,6 +730,40 @@
   <script type="module" src="shopify-config.js"></script>
   <script type="module" src="shopify-integration.js"></script>
   <script type="module" src="product-page.js"></script>
+
+  <!-- Product JSON-LD injected dynamically -->
+  <script>
+    // This will be overwritten after product load in product-page.js
+    window.__NXOR__renderProductJsonLd = function(p){
+      try{
+        if(!p) return;
+        const firstImage = p.images?.edges?.[0]?.node?.originalSrc || '';
+        const firstVariant = p.variants?.edges?.[0]?.node;
+        const price = firstVariant?.price?.amount || '';
+        const inStock = (firstVariant?.availableForSale ? 'InStock' : 'OutOfStock');
+        const url = `https://obakegao.com/product.html?handle=${p.handle}`;
+        const data = {
+          "@context":"https://schema.org",
+          "@type":"Product",
+          name: p.title,
+          image: firstImage ? [firstImage] : [],
+          description: (p.description || '').slice(0, 160),
+          brand: {"@type":"Brand","name":"NXOR"},
+          offers: {
+            "@type":"Offer",
+            price: String(price),
+            priceCurrency: "USD",
+            availability: `https://schema.org/${inStock}`,
+            url
+          }
+        };
+        const el = document.createElement('script');
+        el.type = 'application/ld+json';
+        el.textContent = JSON.stringify(data);
+        document.head.appendChild(el);
+      }catch(e){console.warn('json-ld error', e)}
+    }
+  </script>
 
   <style>
     /* Mobile sticky CTA styles */

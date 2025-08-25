@@ -453,10 +453,23 @@ window.cartPage = null;
 
 // Proceed to checkout
 window.proceedToCheckout = function() {
-  if (cartPage.cart && cartPage.cart.checkoutUrl) {
-    window.location.href = cartPage.cart.checkoutUrl;
-  } else {
-    alert('チェックアウトURLが見つかりません\nCheckout URL not found');
+  try {
+    if (window.cart && typeof window.cart.proceedToCheckout === 'function') {
+      window.cart.proceedToCheckout();
+      return;
+    }
+    if (cartPage.cart && cartPage.cart.checkoutUrl) {
+      window.location.href = cartPage.cart.checkoutUrl;
+      return;
+    }
+    // Soft feedback, no alert
+    const note = document.createElement('div');
+    note.className = 'cart-notification error';
+    note.textContent = 'Checkout not ready';
+    document.body.appendChild(note);
+    setTimeout(() => note.remove(), 2500);
+  } catch (e) {
+    console.error('Checkout trigger failed:', e);
   }
 };
 

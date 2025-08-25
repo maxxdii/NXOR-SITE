@@ -317,25 +317,96 @@ export class Cart {
 
   async proceedToCheckout() {
     try {
+      // 1) Ensure Shopify cart exists
       if (!this.cartId) {
         await this.createCart();
       }
 
-      // Get cart checkout URL from Shopify
-      const result = await shopify.query(`
-        query getCart($id: ID!) {
-          cart(id: $id) {
-            checkoutUrl
+      // 2) Compute delta between local items and Shopify cart, then add only needed quantities
+      const localDesired = (this.items || []).reduce((acc, i) => {
+        acc[i.variantId] = (acc[i.variantId] || 0) + (i.quantity || 0);
+        return acc;
+      }, {});
+
+      if (Object.keys(localDesired).length > 0) {
+        // Fetch current cart lines to compare
+        const currentCartRes = await shopify.query(
+          `query getCartLines($id: ID!) { cart(id: $id) { lines(first: 100) { edges { node { quantity merchandise { ... on ProductVariant { id } } } } } } }`,
+          { id: this.cartId }
+        );
+        const remote = {};
+        currentCartRes?.cart?.lines?.edges?.forEach(e => {
+          const vid = e.node?.merchandise?.id;
+          const qty = e.node?.quantity || 0;
+          if (vid) remote[vid] = (remote[vid] || 0) + qty;
+        });
+
+        const linesToAdd = Object.entries(localDesired)
+          .map(([vid, qty]) => ({ merchandiseId: vid, quantity: Math.max(0, qty - (remote[vid] || 0)) }))
+          .filter(l => l.quantity > 0);
+
+        if (linesToAdd.length > 0) {
+          try {
+            await shopify.addToCart(this.cartId, linesToAdd);
+          } catch (addErr) {
+            console.warn('cartLinesAdd failed or partially failed:', addErr);
           }
         }
-      `, { id: this.cartId });
-
-      if (result.cart && result.cart.checkoutUrl) {
-        window.location.href = result.cart.checkoutUrl;
       }
+
+      // 3) Refetch the cart to get a fresh checkoutUrl
+      const result = await shopify.query(
+        `query getCart($id: ID!) { cart(id: $id) { checkoutUrl } }`,
+        { id: this.cartId }
+      );
+
+      const checkoutUrl = result?.cart?.checkoutUrl;
+      if (checkoutUrl) {
+        // If Shopify returned a checkout URL on an old/custom domain, rewrite it to the alias domain
+        try {
+          const targetHost = window?.shopify?.domain || 'xxmdnxx.myshopify.com';
+          const u = new URL(checkoutUrl);
+          if (u.hostname !== targetHost) {
+            u.hostname = targetHost;
+            window.location.href = u.toString();
+            return;
+          }
+        } catch (_) {
+          // Fall through to default redirect
+        }
+        window.location.href = checkoutUrl;
+        return;
+      }
+
+      throw new Error('No checkoutUrl returned');
     } catch (error) {
       console.error('Error proceeding to checkout:', error);
-      this.showCartNotification('チェックアウトエラー', 'error');
+      this.showCartNotification('チェックアウトに進めませんでした', 'error');
+      // As a last resort, try creating a fresh cart and redirecting again
+      try {
+        this.cartId = null;
+        localStorage.removeItem('nxor_cart_id');
+        await this.createCart();
+        const retry = await shopify.query(
+          `query getCart($id: ID!) { cart(id: $id) { checkoutUrl } }`,
+          { id: this.cartId }
+        );
+        const url2 = retry?.cart?.checkoutUrl;
+        if (url2) {
+          const targetHost = window?.shopify?.domain || 'xxmdnxx.myshopify.com';
+          try {
+            const u2 = new URL(url2);
+            if (u2.hostname !== targetHost) u2.hostname = targetHost;
+            window.location.href = u2.toString();
+            return;
+          } catch (_) {
+            window.location.href = url2;
+            return;
+          }
+        }
+      } catch (e2) {
+        console.error('Final checkout retry failed:', e2);
+      }
     }
   }
 
@@ -359,12 +430,13 @@ export class Cart {
 // Product loading and display
 async function loadProducts() {
   console.log('🔍 Attempting to load products from Shopify...');
-  console.log('🌐 API Endpoint:', `https://xxmdnxx.myshopify.com/api/2024-01/graphql.json`);
+    // Log the configured endpoint for visibility
+    const endpointInfo = (window?.shopify?.endpoint) || 'unknown endpoint';
+    console.log('🌐 API Endpoint:', endpointInfo);
   
   try {
     const productsData = await shopify.getProducts();
     console.log('📦 Raw Shopify API Response:', productsData);
-    
     const products = productsData.products.edges.map(edge => edge.node);
     console.log('🛍️ Processed products:', products);
     
@@ -671,10 +743,10 @@ window.showProductPreview = async function(productId, productHandle) {
       }
     `;
 
-    const response = await window.cart.shopifyClient.graphql(query, { id: productId });
-    console.log('GraphQL response:', response);
+  const response = await shopify.query(query, { id: productId });
+  console.log('GraphQL response:', response);
     
-    const product = response.data?.product;
+  const product = response?.product;
     
     if (product) {
       createProductModal(product);

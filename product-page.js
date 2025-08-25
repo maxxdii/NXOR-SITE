@@ -1,5 +1,5 @@
 // Product page functionality
-import { SHOPIFY_CONFIG } from './shopify-config.js';
+import { shopify } from './shopify-config.js';
 import { Cart } from './shopify-integration.js';
 
 class ProductPage {
@@ -16,22 +16,7 @@ class ProductPage {
     console.log('ProductPage init called');
     
     try {
-      // Initialize Shopify client
-      this.shopifyClient = {
-        graphql: async (query, variables = {}) => {
-          const response = await fetch(`https://${SHOPIFY_CONFIG.domain}/api/2023-07/graphql.json`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-Shopify-Storefront-Access-Token': SHOPIFY_CONFIG.storefrontAccessToken
-            },
-            body: JSON.stringify({ query, variables })
-          });
-          return response.json();
-        }
-      };
-
-      console.log('Shopify client initialized');
+      console.log('Shopify client ready (shared config)');
 
       // Get product ID from URL parameters
       const urlParams = new URLSearchParams(window.location.search);
@@ -146,10 +131,10 @@ class ProductPage {
         variables = { id: productId };
       }
 
-      const response = await this.shopifyClient.graphql(query, variables);
+      const response = await shopify.query(query, variables);
       
-      if (response.data && (response.data.product || response.data.productByHandle)) {
-        this.product = response.data.product || response.data.productByHandle;
+      if (response && (response.product || response.productByHandle)) {
+        this.product = response.product || response.productByHandle;
         this.renderProduct();
       } else {
         console.error('Product not found');
@@ -264,7 +249,7 @@ class ProductPage {
       const optionElement = document.createElement('button');
       optionElement.className = 'variant-option';
       optionElement.textContent = value;
-      optionElement.onclick = () => this.selectOption(option.name, value, optionElement);
+  optionElement.onclick = () => this.selectOption(option.name, value, optionElement);
       sizeOptions.appendChild(optionElement);
     });
   }
@@ -351,16 +336,21 @@ window.addToCartFromProduct = async function(productId) {
     const quantity = parseInt(document.getElementById('quantity').value) || 1;
     console.log('Quantity:', quantity);
     
-    // For testing, use a hardcoded variant ID
-    let selectedVariantId = 'gid://shopify/ProductVariant/VARIANT_ID_1'; // Default fallback
+    // Determine the selected variant from the current selection
+    const page = window.productPage;
+    const product = page?.product;
+    let selectedVariantId = page?.selectedVariant?.id;
     
-    // Try to get the actual product variant if available
-    const product = window.productPage?.product;
-    if (product && product.variants && product.variants.edges.length > 0) {
-      selectedVariantId = product.variants.edges[0].node.id;
-      console.log('Using product variant:', selectedVariantId);
-    } else {
-      console.log('Using fallback variant ID');
+    // Fallbacks: first available variant, then first variant
+    if (!selectedVariantId && product?.variants?.edges?.length) {
+      const firstAvailable = product.variants.edges.find(e => e.node.availableForSale)?.node;
+      selectedVariantId = (firstAvailable || product.variants.edges[0].node).id;
+      console.log('Fallback variant selected:', selectedVariantId);
+    }
+    
+    if (!selectedVariantId) {
+      console.error('No variant is available to add');
+      return;
     }
     
     console.log('Selected variant ID:', selectedVariantId);
@@ -368,7 +358,6 @@ window.addToCartFromProduct = async function(productId) {
     // Check if cart exists
     if (!window.cart) {
       console.error('Cart not available');
-      alert('Cart not available. Please refresh the page.');
       return;
     }
     
@@ -390,7 +379,7 @@ window.addToCartFromProduct = async function(productId) {
     }
   } catch (error) {
     console.error('Error in addToCartFromProduct:', error);
-    alert('Error adding to cart: ' + error.message);
+    // Silent failure; message in console
   }
 };
 

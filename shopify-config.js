@@ -10,7 +10,7 @@ export const SHOPIFY_CONFIG = {
   storefrontAccessToken: '055c416dfc0c03e343a6a156121b9127',
   
   // API Version
-  apiVersion: '2024-01'
+  apiVersion: '2024-07'
 };
 
 // Shopify Storefront API Client

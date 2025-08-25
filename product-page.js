@@ -308,6 +308,8 @@ class ProductPage {
       const priceElement = document.getElementById('productPrice');
       const price = parseFloat(this.selectedVariant.price.amount);
       priceElement.textContent = `$${price.toFixed(2)}`;
+  const mobilePrice = document.getElementById('mobileCtaPrice');
+  if (mobilePrice) mobilePrice.textContent = `$${price.toFixed(2)}`;
     }
   }
 

@@ -256,10 +256,11 @@ export class Cart {
                       product {
                         title
                         handle
-                        images(first: 1) {
+        images(first: 1) {
                           edges {
                             node {
-                              originalSrc
+          url
+          originalSrc
                               altText
                             }
                           }
@@ -284,7 +285,7 @@ export class Cart {
         const product = line.merchandise.product;
         const variant = line.merchandise;
         const imageUrl = product.images.edges.length > 0 
-          ? product.images.edges[0].node.originalSrc 
+          ? (product.images.edges[0].node.url || product.images.edges[0].node.originalSrc)
           : 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iIzIyMiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmb250LWZhbWlseT0iQXJpYWwiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5OWE9SPC90ZXh0Pjwvc3ZnPg==';
         
         const price = parseFloat(variant.price.amount);
@@ -435,10 +436,15 @@ async function loadProducts() {
     console.log('🌐 API Endpoint:', endpointInfo);
   
   try {
-    const productsData = await shopify.getProducts();
-    console.log('📦 Raw Shopify API Response:', productsData);
-    const products = productsData.products.edges.map(edge => edge.node);
-    console.log('🛍️ Processed products:', products);
+    // Fetch all products across pages (removes 20-item cap)
+    const products = typeof shopify.getAllProducts === 'function'
+      ? await shopify.getAllProducts()
+      : await (async () => {
+          const productsData = await shopify.getProducts(50);
+          const edges = productsData?.products?.edges || [];
+          return edges.map(e => e.node);
+        })();
+    console.log('� Loaded products list:', products);
     
     if (products.length === 0) {
       console.log('⚠️ No products found in Shopify store');
@@ -484,7 +490,7 @@ function renderProducts(products) {
       ${product.tags?.includes('limited') ? '<span class="badge limited">限定</span>' : ''}
       ${!variant?.availableForSale ? '<span class="badge sold-out">完売</span>' : ''}
       <div class="product-image" onclick="showProductPreview('${product.id}', '${product.handle}')">
-        <img src="${image?.originalSrc || 'placeholder.jpg'}" alt="${image?.altText || product.title}" />
+  <img src="${image?.url || image?.originalSrc || 'placeholder.jpg'}" alt="${image?.altText || product.title}" />
         <div class="image-overlay">
           <span class="overlay-text">詳細を見る</span>
           <div class="translation" aria-hidden="true">View Details</div>
@@ -718,10 +724,11 @@ window.showProductPreview = async function(productId, productHandle) {
           title
           description
           handle
-          images(first: 10) {
+      images(first: 10) {
             edges {
               node {
-                originalSrc
+        url
+        originalSrc
                 altText
               }
             }
@@ -780,12 +787,12 @@ function createProductModal(product) {
       <div class="modal-body">
         <div class="modal-images">
           <div class="main-image">
-            <img id="modalMainImage" src="${images[0]?.node.originalSrc || ''}" alt="${product.title}">
+            <img id="modalMainImage" src="${images[0]?.node.url || images[0]?.node.originalSrc || ''}" alt="${product.title}">
           </div>
           ${images.length > 1 ? `
             <div class="image-thumbnails">
               ${images.map((image, index) => `
-                <img src="${image.node.originalSrc}" 
+                <img src="${image.node.url || image.node.originalSrc}" 
                      alt="${image.node.altText || product.title}" 
                      class="thumbnail ${index === 0 ? 'active' : ''}"
                      onclick="switchMainImage('${image.node.originalSrc}', this)">

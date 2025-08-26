@@ -57,10 +57,12 @@ export class ShopifyClient {
   }
 
   // Fetch all products
-  async getProducts(first = 20) {
+  async getProducts(first = 20, after = null) {
+    // Single-page products fetch with pageInfo for pagination support
     const query = `
-      query getProducts($first: Int!) {
-        products(first: $first) {
+      query getProducts($first: Int!, $after: String) {
+        products(first: $first, after: $after) {
+          pageInfo { hasNextPage endCursor }
           edges {
             node {
               id
@@ -68,33 +70,19 @@ export class ShopifyClient {
               handle
               description
               priceRange {
-                minVariantPrice {
-                  amount
-                  currencyCode
-                }
+                minVariantPrice { amount currencyCode }
               }
               images(first: 1) {
-                edges {
-                  node {
-                    originalSrc
-                    altText
-                  }
-                }
+                edges { node { url originalSrc altText } }
               }
               variants(first: 10) {
                 edges {
                   node {
                     id
                     title
-                    price {
-                      amount
-                      currencyCode
-                    }
+                    price { amount currencyCode }
                     availableForSale
-                    selectedOptions {
-                      name
-                      value
-                    }
+                    selectedOptions { name value }
                   }
                 }
               }
@@ -104,7 +92,66 @@ export class ShopifyClient {
       }
     `;
 
-    return this.query(query, { first });
+    return this.query(query, { first, after });
+  }
+
+  async getAllProducts(max = 1000, pageSize = 50) {
+    // Fetch all products across pages up to a max cap
+    const allNodes = [];
+    let hasNextPage = true;
+    let after = null;
+
+    while (hasNextPage && allNodes.length < max) {
+      const data = await this.getProducts(Math.min(pageSize, max - allNodes.length), after);
+      const connection = data?.products;
+      const edges = connection?.edges || [];
+      for (const e of edges) {
+        allNodes.push(e.node);
+      }
+      hasNextPage = Boolean(connection?.pageInfo?.hasNextPage);
+      after = connection?.pageInfo?.endCursor || null;
+    }
+
+    return allNodes;
+  }
+
+  async getAllCollectionProducts(collectionHandle, max = 500, pageSize = 50) {
+    // Fetch all products from a specific collection via handle
+    const query = `
+      query collectionProducts($handle: String!, $first: Int!, $after: String) {
+        collection(handle: $handle) {
+          id
+          title
+          products(first: $first, after: $after) {
+            pageInfo { hasNextPage endCursor }
+            edges {
+              node {
+                id
+                title
+                handle
+                description
+                priceRange { minVariantPrice { amount currencyCode } }
+                images(first: 1) { edges { node { url originalSrc altText } } }
+                variants(first: 10) { edges { node { id title price { amount currencyCode } availableForSale } } }
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const all = [];
+    let after = null;
+    let hasNext = true;
+    while (hasNext && all.length < max) {
+      const data = await this.query(query, { handle: collectionHandle, first: Math.min(pageSize, max - all.length), after });
+      const conn = data?.collection?.products;
+      const edges = conn?.edges || [];
+      for (const e of edges) all.push(e.node);
+      hasNext = Boolean(conn?.pageInfo?.hasNextPage);
+      after = conn?.pageInfo?.endCursor || null;
+    }
+    return all;
   }
 
   // Create cart (updated API)
